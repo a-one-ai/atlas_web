@@ -21,12 +21,8 @@ class ApiService {
   Future<SummaryResponse> uploadStream(String text) async {
     try {
       log('Sending text to server: $text');
-      var headers = {
-        'Content-Type': 'application/json'
-      };
-      var data = {
-        'link': text
-      };
+      var headers = {'Content-Type': 'application/json'};
+      var data = {'link': text};
       var dio = Dio();
       var response = await dio.request(
         'http://184.105.217.223:8000/getYoutubeVideoLink',
@@ -59,67 +55,5 @@ class ApiService {
       rethrow; // Rethrow other errors for upper-level handling
     }
   }
-
-<<<<<<< HEAD
-  Future<SummaryResponse> transcriptVideo( PlatformFile tempFile) async {
-=======
-  Future<SummaryResponse> transcriptVideo(PlatformFile tempFile) async {
->>>>>>> 321628e1fe2140ba4363c31a995fd4b7dc223929
-    try {
-      FormData formData = FormData.fromMap({
-        'video': MultipartFile.fromFile(
-          tempFile.path!,
-           )
-      });
-
-      final response = await _dio.post(
-        '/getVideoFile',
-        data: formData,
-        options: Options(
-          contentType: 'multipart/form-data',
-        ),
-      );
-
-      if (response.statusCode == 200) {
-        return SummaryResponse.fromJson(response.data);
-      } else {
-        throw Exception('Failed to summarize video');
-      }
-    } catch (e) {
-      print('Caught error: $e');
-      rethrow;
-    }
-  }
-
-  Future<SummaryResponse> transcriptAudio(PlatformFile tempFile) async {
-    try {
-      FormData formData = FormData.fromMap({
-<<<<<<< HEAD
-        'audio':  await MultipartFile.fromBytes(
-          tempFile.bytes??[],
-          filename: tempFile.name,
-
-=======
-        'audio':  await MultipartFile.fromFile(
-          tempFile.path!,
-          filename: tempFile.name,
->>>>>>> 321628e1fe2140ba4363c31a995fd4b7dc223929
-        ),
-      });
-
-      final response = await _dio.post(
-        '/getAudioFile',
-        data: formData,
-      );
-
-      if (response.statusCode == 200) {
-        return SummaryResponse.fromJson(response.data);
-      } else {
-        throw Exception('Failed to summarize audio');
-      }
-    } catch (e) {
-      print('Caught error: $e');
-      rethrow;
-    }
-  }
 }
+
