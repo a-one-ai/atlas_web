@@ -2,6 +2,7 @@ import 'package:atlas/components/constants.dart';
 import 'package:atlas/pages/result_screen.dart';
 import 'package:atlas/services/api.dart';
 import 'package:atlas/services/file_pick.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
@@ -26,7 +27,6 @@ class UploadAudioPage extends StatefulWidget {
 class _UploadAudioPageState extends State<UploadAudioPage> {
   bool is_loading = false;
   bool is_uploaded = false;
-  var file;
   @override
   Widget build(BuildContext context) {
 
@@ -102,17 +102,53 @@ class _UploadAudioPageState extends State<UploadAudioPage> {
                       ),
                     ):
                     GestureDetector(
-                      onTap: () {
+                      onTap: () async {
                         // Logic to upload video/audio files
-                        pickAudioFile().then((value){
+                       await pickAudioFile().then(( value){
+
                           setState(() {
-                            file = value;
                             is_uploaded = true;
+                          });
+                          if (value == null) {
+                            print('No file selected');
+
+                            setState(() {
+                              is_uploaded = false;
+                            });
+                            return;
+                          }
+
+                          ApiService().uploadStream(value).then((response) {
+                            setState(() {
+                              is_loading = true;
+                            });
+                            return Navigator.of(context).push(
+                                MaterialPageRoute(builder: (context)=>ResultScreen(
+                                  results: {
+                                    'ar_script': response.arScript,
+                                    'en_script': response.enScript,
+                                    'ar_summary': response.arSummary,
+                                    'en_summary': response.enSummary,
+                                    'transcript_with_time_stamp': response.scriptTime
+                                  },
+
+                                  color: AudioUploadPattern.secondColor,
+                                )
+                                )
+                            );
+                          }).catchError((e){
+                            debugPrint(e);
+                            setState(() {
+                              is_loading = false;
+                            });
                           });
 
                         }).catchError((e){
-                          debugPrint(e);
-                        });
+                          debugPrint(e.toString());
+                          setState(() {
+                            is_loading = false;
+                          });
+                       });
                       },
                       child: Container(
                         width: 250,
@@ -141,58 +177,60 @@ class _UploadAudioPageState extends State<UploadAudioPage> {
                       ),
                     ),
                     SizedBox(height: 40),
-                    ElevatedButton(
-                      onPressed: () {
-                        setState(() {
-                          is_loading = true;
-                        });
-                        ApiService().transcriptAudio(file).then((response) {
-                          return Navigator.of(context).push(
-                              MaterialPageRoute(builder: (context)=>ResultScreen(
-                                results: {
-                                  'ar_script': response.arScript,
-                                  'en_script': response.enScript,
-                                  'ar_summary': response.arSummary,
-                                  'en_summary': response.enSummary,
-                                  'transcript_with_time_stamp': response.scriptTime
-                                },
-
-                                color: AudioUploadPattern.secondColor,
-                              )
-                              )
-                          );
-                        }).catchError((e){
-                          debugPrint(e);
-                        });
-                        // // Logic to transcribe the uploaded file
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //     builder: (context) => ResultScreen(
-                        //       color: widget.SecondColor,
-                        //       results: {
-                        //         'ar_transcribe': 'Arabic Transcription',
-                        //         'en_transcribe': 'English Transcription',
-                        //         'ar_summary': 'Arabic Summary',
-                        //         'en_summary': 'English Summary',
-                        //         'transcribe_with_time_stamp': 'Transcription with Timestamp',
-                        //       },
-                        //     ),
-                        //   ),
-
-                      //  );
-                      },
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
-                        child: Text(
-                          'Start Transcription',
-                          style: TextStyle(fontSize: 20, color: Color(0xFFFAF1E4)),
-                        ),
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        foregroundColor: Colors.black, backgroundColor: widget.FirstColor,
-                      ),
-                    ),
+                    // ElevatedButton(
+                    //   onPressed: () {
+                    //     setState(() {
+                    //       is_loading = true;
+                    //     });
+                    //     ApiService().uploadStream(file).then((response) {
+                    //       return Navigator.of(context).push(
+                    //           MaterialPageRoute(builder: (context)=>ResultScreen(
+                    //             results: {
+                    //               'ar_script': response.arScript,
+                    //               'en_script': response.enScript,
+                    //               'ar_summary': response.arSummary,
+                    //               'en_summary': response.enSummary,
+                    //               'transcript_with_time_stamp': response.scriptTime
+                    //             },
+                    //
+                    //             color: AudioUploadPattern.secondColor,
+                    //           )
+                    //           )
+                    //       );
+                    //     }).catchError((e){
+                    //       debugPrint(e);
+                    //       setState(() {
+                    //         is_loading = false;
+                    //       });
+                    //     });
+                    //     // // Logic to transcribe the uploaded file
+                    //     // Navigator.push(
+                    //     //   context,
+                    //     //   MaterialPageRoute(
+                    //     //     builder: (context) => ResultScreen(
+                    //     //       color: widget.SecondColor,
+                    //     //       results: {
+                    //     //         'ar_transcribe': 'Arabic Transcription',
+                    //     //         'en_transcribe': 'English Transcription',
+                    //     //         'ar_summary': 'Arabic Summary',
+                    //     //         'en_summary': 'English Summary',
+                    //     //         'transcribe_with_time_stamp': 'Transcription with Timestamp',
+                    //     //       },
+                    //     //     ),
+                    //     //   ),
+                    //   //  );
+                    //   },
+                    //   child: Padding(
+                    //     padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+                    //     child: Text(
+                    //       'Start Transcription',
+                    //       style: TextStyle(fontSize: 20, color: Color(0xFFFAF1E4)),
+                    //     ),
+                    //   ),
+                    //   style: ElevatedButton.styleFrom(
+                    //     foregroundColor: Colors.black, backgroundColor: widget.FirstColor,
+                    //   ),
+                    // ),
                     SizedBox(height: 60),
                   ],
                 ),

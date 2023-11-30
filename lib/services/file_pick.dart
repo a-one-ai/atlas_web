@@ -1,31 +1,50 @@
+import 'dart:async';
 
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/foundation.dart';
+import 'package:path_provider/path_provider.dart';
 
-pickVideoFile() async {
-  FilePickerResult? result = await FilePicker.platform.pickFiles(
+import 'firebase_services/fb_file_stroage.dart';
+
+Future<String?> pickVideoFile() async {
+  await FilePicker.platform
+      .pickFiles(
     type: FileType.video,
     allowMultiple: false,
-  );
-
-  if (result != null) {
-    PlatformFile file = result.files.first;
-
-    return file;
-  } else {
-    return null;
-  }
+  )
+      .then((result) async {
+    print(result!.files.first.name);
+    var file = result.files.first;
+    await uploadFileToFirebaseStorage(file).then((value) {
+      value==null ?debugPrint('link is null'):
+      debugPrint('link : $value');
+      return value;
+    }).catchError((e) {
+      debugPrint('upload FB error is ${e.toString()}');
+    }).catchError((e) {
+      debugPrint('Error Pick File is ${e.toString()}');
+    });
+  });
 }
 
-pickAudioFile() async {
-  FilePickerResult? result = await FilePicker.platform.pickFiles(
+Future<String?> pickAudioFile() async {
+  await FilePicker.platform
+      .pickFiles(
     type: FileType.audio,
     allowMultiple: false,
-  );
+  )
+      .then((result) async {
+    print(result!.files.first.name);
+    var file = result.files.first;
+    await uploadFileToFirebaseStorage(file).then((value) {
+      value==null ?debugPrint('link is null'):
+      debugPrint('link : $value');
 
-  if (result != null) {
-    PlatformFile file = result.files.first;
-    return file;
-  } else {
-    return null;
-  }
+      return value;
+    }).catchError((e) {
+      debugPrint('upload FB error is ${e.toString()}');
+    }).catchError((e) {
+      debugPrint('Error Pick File is ${e.toString()}');
+    });
+  });
 }
