@@ -125,11 +125,11 @@ class _UploadAudioPageState extends State<UploadAudioPage> {
                             return Navigator.of(context).push(
                                 MaterialPageRoute(builder: (context)=>ResultScreen(
                                   results: {
-                                    'ar_script': response.arScript,
-                                    'en_script': response.enScript,
-                                    'ar_summary': response.arSummary,
-                                    'en_summary': response.enSummary,
-                                    'transcript_with_time_stamp': response.scriptTime
+                                    'ar_script': response.data!.arScript!,
+                                    'en_script': response.data!.enScript!,
+                                    'ar_summary': response.data!.arSummary!,
+                                    'en_summary': response.data!.enSummary!,
+                                    'transcript_with_time_stamp': response.data!.scriptTime!
                                   },
 
                                   color: AudioUploadPattern.secondColor,
@@ -177,103 +177,7 @@ class _UploadAudioPageState extends State<UploadAudioPage> {
                       ),
                     ),
                     SizedBox(height: 40),
-                    // ElevatedButton(
-                    //   onPressed: () {
-                    //     setState(() {
-                    //       is_loading = true;
-                    //     });
-                    //     ApiService().uploadStream(file).then((response) {
-                    //       return Navigator.of(context).push(
-                    //           MaterialPageRoute(builder: (context)=>ResultScreen(
-                    //             results: {
-                    //               'ar_script': response.arScript,
-                    //               'en_script': response.enScript,
-                    //               'ar_summary': response.arSummary,
-                    //               'en_summary': response.enSummary,
-                    //               'transcript_with_time_stamp': response.scriptTime
-                    //             },
-                    //
-                    //             color: AudioUploadPattern.secondColor,
-                    //           )
-                    //           )
-                    //       );
-                    //     }).catchError((e){
-                    //       debugPrint(e);
-                    //       setState(() {
-                    //         is_loading = false;
-                    //       });
-                    //     });
-                    //     // // Logic to transcribe the uploaded file
-                    //     // Navigator.push(
-                    //     //   context,
-                    //     //   MaterialPageRoute(
-                    //     //     builder: (context) => ResultScreen(
-                    //     //       color: widget.SecondColor,
-                    //     //       results: {
-                    //     //         'ar_transcribe': 'Arabic Transcription',
-                    //     //         'en_transcribe': 'English Transcription',
-                    //     //         'ar_summary': 'Arabic Summary',
-                    //     //         'en_summary': 'English Summary',
-                    //     //         'transcribe_with_time_stamp': 'Transcription with Timestamp',
-                    //     //       },
-                    //     //     ),
-                    //     //   ),
-                    //   //  );
-                    //   },
-                    //   child: Padding(
-                    //     padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
-                    //     child: Text(
-                    //       'Start Transcription',
-                    //       style: TextStyle(fontSize: 20, color: Color(0xFFFAF1E4)),
-                    //     ),
-                    //   ),
-                    //   style: ElevatedButton.styleFrom(
-                    //     foregroundColor: Colors.black, backgroundColor: widget.FirstColor,
-                    //   ),
-                    // ),
-                    SizedBox(height: 60),
-                  ],
-                ),
-                // AnimatedOpacity(
-                //   opacity: 1.0,
-                //   duration: Duration(seconds: 1),
-                //   curve: Curves.easeInOut,
-                //   child: Container(
-                //     padding: EdgeInsets.all(20),
-                //     decoration: BoxDecoration(
-                //       color: Color(0xFFA7C5EB), // Link Color
-                //       borderRadius: BorderRadius.circular(10),
-                //     ),
-                //     child: Text(
-                //       'Summarized Text Display Area\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed auctor nisl et libero tempus tincidunt. Morbi vitae velit velit.',
-                //       style: TextStyle(fontSize: 16, color: Color(0xFF6C7A89)),
-                //     ),
-                //   ),
-                // ),
-                // SizedBox(height: 60),
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.center,
-                //   children: <Widget>[
-                //     IconButton(
-                //       onPressed: () {
-                //         // Navigate to social media page
-                //       },
-                //       icon: Icon(Icons.music_note, color: Color(0xFF3ABE9D)), // Audio Color
-                //     ),
-                //     IconButton(
-                //       onPressed: () {
-                //         // Navigate to social media page
-                //       },
-                //       icon: Icon(Icons.videocam, color: Color(0xFF5B0888)), // Video Color
-                //     ),
-                //     IconButton(
-                //       onPressed: () {
-                //         // Navigate to social media page
-                //       },
-                //       icon: Icon(Icons.link, color: Color(0xFF713ABE)), // Link Color
-                //     ),
-                //   ],
-                // ),
+
                 SizedBox(height: 20),
                 Text(
                   '© 2023 Atlas Transcription',
@@ -281,9 +185,12 @@ class _UploadAudioPageState extends State<UploadAudioPage> {
                 ),
               ],
             ),
-          ),
+              ],
+        ),
+      ),
         ),
       ),
     );
+
   }
 }

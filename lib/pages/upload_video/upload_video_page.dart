@@ -135,11 +135,11 @@ class _UploadVideoPageState extends State<UploadVideoPage> {
                             return Navigator.of(context).push(
                                 MaterialPageRoute(builder: (context)=>ResultScreen(
                                   results: {
-                                    'ar_script': response.arScript,
-                                    'en_script': response.enScript,
-                                    'ar_summary': response.arSummary,
-                                    'en_summary': response.enSummary,
-                                    'transcript_with_time_stamp': response.scriptTime
+                                     'ar_script': response.data!.arScript!,
+                                    'en_script': response.data!.enScript!,
+                                    'ar_summary': response.data!.arSummary!,
+                                    'en_summary': response.data!.enSummary!,
+                                    'transcript_with_time_stamp': response.data!.scriptTime!
                                   },
 
                                   color: AudioUploadPattern.secondColor,
@@ -187,68 +187,12 @@ class _UploadVideoPageState extends State<UploadVideoPage> {
                       ),
                     ),
                     SizedBox(height: 40),
-                    // ElevatedButton(
-                    //   onPressed: () {
-                    //     // Logic to transcribe the uploaded file
-                    //     if (file == null) {
-                    //       showSnackBar('Please Upload a File', isError: true);
-                    //       return;
-                    //     }
-                    //     setState(() {
-                    //       is_loading = true;
-                    //     });
-                    //     ApiService().uploadStream(file).then((response) {
-                    //       return Navigator.of(context).push(
-                    //           MaterialPageRoute(builder: (context)=>ResultScreen(
-                    //             results: {
-                    //               'ar_script': response.arScript,
-                    //               'en_script': response.enScript,
-                    //               'ar_summary': response.arSummary,
-                    //               'en_summary': response.enSummary,
-                    //               'transcript_with_time_stamp': response.scriptTime
-                    //             },
-                    //
-                    //             color: AudioUploadPattern.secondColor,
-                    //           )
-                    //           )
-                    //       );
-                    //     }).catchError((e){
-                    //       debugPrint('hava an error is $e');
-                    //
-                    //       setState(() {
-                    //         is_loading = false;
-                    //       });
-                    //     }).whenComplete(() {
-                    //
-                    //     });
-                    //     // Logic to transcribe the uploaded file
-                    //     // Navigator.push(
-                    //     //   context,
-                    //     //   MaterialPageRoute(
-                    //     //     builder: (context) => ResultScreen(
-                    //     //       color: SecondColor,
-                    //     //       results: {
-                    //     //         'ar_transcribe': 'Arabic Transcription',
-                    //     //         'en_transcribe': 'English Transcription',
-                    //     //         'ar_summary': 'Arabic Summary',
-                    //     //         'en_summary': 'English Summary',
-                    //     //         'transcribe_with_time_stamp': 'Transcription with Timestamp',
-                    //     //       },
-                    //     //     ),
-                    //     //   ),
-                    //     // );
-                    //   },
-                    //   child: Padding(
-                    //     padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
-                    //     child: Text(
-                    //       'Start Transcription',
-                    //       style: TextStyle(fontSize: 20, color: Color(0xFFFAF1E4)),
-                    //     ),
-                    //   ),
-                    //   style: ElevatedButton.styleFrom(
-                    //     foregroundColor: Colors.black, backgroundColor: FirstColor,
-                    //   ),
-                    // ),
+
+                      
+                    
+                    
+                    SizedBox(height: 60),
+                    
                     SizedBox(height: 60),
 
                     SizedBox(height: 20),

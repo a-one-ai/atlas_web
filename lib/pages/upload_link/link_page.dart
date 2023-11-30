@@ -2,6 +2,7 @@
 
 
 import 'package:atlas/components/constants.dart';
+import 'package:atlas/model/response_model.dart';
 import 'package:atlas/pages/result_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
@@ -151,6 +152,7 @@ class _LInkPageState extends State<LInkPage> {
     });
 
     ApiService().uploadStream(_streamLink.text).then((value) {
+      print('value: $value');
       handleTranscriptionResponse(value);
     }).catchError((e) {
       handleError(e);
@@ -161,7 +163,7 @@ class _LInkPageState extends State<LInkPage> {
     });
   }
 
-  void handleTranscriptionResponse(dynamic value) {
+  void handleTranscriptionResponse(SummaryResponse value) {
     if (value == null) {
       showSnackBar('Check your internet connection', isError: true);
       return;
@@ -171,11 +173,11 @@ class _LInkPageState extends State<LInkPage> {
       builder: (context) => ResultScreen(
         color: LinkUploudPattern.secondColor,
         results: {
-          'ar_transcribe': value.arScript.toString(),
-          'en_transcribe': value.enScript.toString(),
-          'ar_summary': value.arSummary.toString(),
-          'en_summary': value.enSummary.toString(),
-          'transcribe_with_time_stamp': value.scriptTime.toString(),
+          'ar_transcribe': value.data!.arScript ?? '',
+          'en_transcribe': value.data!.enScript ?? '',
+          'ar_summary': value.data!.arSummary ?? '',
+          'en_summary': value.data!.enSummary ?? '',
+          'transcribe_with_time_stamp': value.data!.scriptTime ?? '',
         },
       ),
     ));
