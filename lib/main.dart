@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 
-import 'atlas/presentation/pages/landing_page/landing_page.dart';
+import 'presentation/pages/landing_page/landing_page.dart';
 
 
 Future<void> main() async {
