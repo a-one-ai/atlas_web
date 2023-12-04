@@ -6,7 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
-import '../../../../core/colors/colors_manager.dart';
+import '../../../core/colors/colors_manager.dart';
 import '../../services/api/api_helper.dart';
 import '../../widgets/background.dart';
 import '../../widgets/top_menu.dart';

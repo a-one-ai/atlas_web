@@ -1,8 +1,7 @@
-import 'package:atlas_web_final/atlas/presentation/pages/result/widget/result_card.dart';
+import 'package:atlas_web_final/pages/result/widget/result_card.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../core/colors/colors_manager.dart';
-import '../../services/file_helper/save_file.dart';
+
 import '../../widgets/background.dart';
 import '../../widgets/top_menu.dart';
 

@@ -4,7 +4,7 @@
 import 'package:flutter/material.dart';
 
 
-import '../../../../core/colors/colors_manager.dart';
+import '../../../core/colors/colors_manager.dart';
 import '../../widgets/top_menu.dart';
 import '../home_page/home_page.dart';
 

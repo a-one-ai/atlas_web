@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/colors/colors_manager.dart';
+import '../../core/colors/colors_manager.dart';
 
 
 

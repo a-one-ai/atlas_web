@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../core/colors/colors_manager.dart';
+import '../../../../core/colors/colors_manager.dart';
 import '../../../services/file_helper/save_file.dart';
 
 class ResultCard extends StatelessWidget {

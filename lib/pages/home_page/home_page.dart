@@ -1,5 +1,4 @@
 
-import 'package:atlas_web_final/atlas/presentation/pages/home_page/widget/button_feature.dart';
 import 'package:flutter/material.dart';
 
 import '../../widgets/background.dart';
@@ -7,6 +6,7 @@ import '../../widgets/top_menu.dart';
 import '../upload_audio/upload_audio_page.dart';
 import '../upload_link/upload_link_page.dart';
 import '../upload_video/upload_video_page.dart';
+import 'widget/button_feature.dart';
 
 
 class HomeScreen extends StatelessWidget {

@@ -1,5 +1,4 @@
 
-import 'package:atlas_web_final/atlas/presentation/services/file_helper/pick_file.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
@@ -9,7 +8,8 @@ import 'package:http_parser/http_parser.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-import '../../../../core/colors/colors_manager.dart';
+import '../../../core/colors/colors_manager.dart';
+import '../../services/file_helper/pick_file.dart';
 import '../../widgets/background.dart';
 import '../../widgets/top_menu.dart';
 import '../result/result_page.dart';
