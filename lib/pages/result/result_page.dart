@@ -1,7 +1,11 @@
+
 import 'package:atlas_web_final/pages/result/widget/result_card.dart';
 import 'package:flutter/material.dart';
 
 
+
+import '../../../core/colors/colors_manager.dart';
+import '../../services/file_helper/save_file.dart';
 import '../../widgets/background.dart';
 import '../../widgets/top_menu.dart';
 
@@ -18,18 +22,34 @@ class ResultScreen extends StatefulWidget {
 
 class _ResultScreenState extends State<ResultScreen> with SingleTickerProviderStateMixin {
   late TabController _tabController;
-  late List<Widget> resultCards;
+
+
 
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: 5, vsync: this);
     _tabController.addListener(_handleTabSelection);
-    _initializeResultCards();
+
   }
 
-  void _initializeResultCards() {
-    resultCards = [
+
+
+
+  void _handleTabSelection() {
+    setState(() {});
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    var srtContent = generateSrt(widget.results['transcript_with_time_stamp']);
+    List<Widget> resultCards = [
       ResultCard(
         title: 'Arabic Transcription',
         content: widget.results['ar_script'] ?? '',
@@ -45,23 +65,10 @@ class _ResultScreenState extends State<ResultScreen> with SingleTickerProviderSt
         content: widget.results['en_summary'] ?? '',
         color: widget.color,),
       ResultCard(title: 'Transcription with Timestamp',
-        content: widget.results['transcribe_with_timestamp'].toString() ?? '',
+        content:srtContent.toString()??'',
         color: widget.color,),
     ];
-  }
 
-  void _handleTabSelection() {
-    setState(() {});
-  }
-
-  @override
-  void dispose() {
-    _tabController.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
     var size = MediaQuery
         .of(context)
         .size;
@@ -106,8 +113,10 @@ class _ResultScreenState extends State<ResultScreen> with SingleTickerProviderSt
               ElevatedButton(
                 onPressed: () {
                   // Logic to save files and generate STR
+                  saveToFile('output.srt', srtContent);
+
                 },
-                child: Text('Save & Generate Files'),
+                child: Text('Save Subtitle File '),
               ),
             ],
           ),

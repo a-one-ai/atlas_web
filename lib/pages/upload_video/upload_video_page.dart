@@ -1,9 +1,12 @@
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import '../../../core/colors/colors_manager.dart';
 
+import '../../model/res_model.dart';
+import '../../services/api/api_helper.dart';
 import '../../services/file_helper/pick_file.dart';
 import '../../widgets/background.dart';
 import '../../widgets/top_menu.dart';
@@ -34,51 +37,68 @@ class _UploadVideoPageState extends State<UploadVideoPage> {
 
   Color FourthColor  =VideoUploadPattern.fourColor;
 
-  bool is_uploaded = false;
-  bool is_uploading=false;
+
 
   bool is_loading = false;
 
 
-  List<int>? _selectedFile;
 
-  Uint8List? _bytesData;
 
-  startWebFilePicker() async {
-    html.FileUploadInputElement uploadInput = html.FileUploadInputElement();
-    uploadInput.multiple = true;
-    uploadInput.accept = 'video/*';
-    uploadInput.draggable = true;
-    uploadInput.click();
+  uploadVideo(
+      PlatformFile selectedFile
+      ) async {
+    var url = Uri.parse(Mainurl+"/getVideoFile");
+    var request = http.MultipartRequest("POST", url);
+    var videoFile=await http.MultipartFile.fromBytes('video', selectedFile.bytes!,
+        contentType: MediaType('multipart', 'form-data'), filename: selectedFile.name);
+    request.files.add(videoFile);
 
-    uploadInput.onChange.listen((event) {
-      final files = uploadInput.files;
-      final file = files![0];
-      final reader = html.FileReader();
-      setState(() {
-        is_uploading=true;
-      });
+    request.send().then((response) async {
+      if (response.statusCode == 200) {
+        if (kDebugMode) {
+          print("File uploaded successfully");
+        }
+        var responseBody = await response.stream.bytesToString();
+        if (kDebugMode) {
+          print('Server response: $responseBody');
+        }
+        var res= SummaryResponse.fromJson(json.decode(responseBody));
 
-      reader.onLoadEnd.listen((event) {
-        setState(() {
 
-          _bytesData =
-              Base64Decoder().convert(reader.result.toString().split(",").last);
-          _selectedFile = _bytesData;
-          _selectedFile!=null ? is_uploaded = true:is_uploaded=false;
-          is_uploaded==true ?is_uploading=false:null;
+        return res;
+      } else {
+        if (kDebugMode) {
+          print(response.statusCode);
 
-        });
-      });
-      reader.onError.listen((event) {
-        setState(() {
-          is_uploaded = false;
-          is_uploading=false;
-        });
-      });
-      reader.readAsDataUrl(file);
+          setState(() {
+            is_loading=false;
+          });
+        }
+        if (kDebugMode) {
+          print('file upload failed');
+        }
+      }
     });
   }
+
+  pickVideoFile() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.video,
+      allowMultiple: false,
+    );
+
+    if (result != null) {
+      PlatformFile file = result.files.first;
+setState(() {
+  is_loading=true;
+});
+      var res=await uploadVideo(file);
+
+      return res;
+    }
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -97,9 +117,8 @@ class _UploadVideoPageState extends State<UploadVideoPage> {
           backgroundColor: Colors.transparent,
         body:
 
-        Builder(
-          builder: (context) {
-            return Container(
+
+        Container(
               width: double.infinity,
               child: SingleChildScrollView(
                 padding: EdgeInsets.all(40),
@@ -141,55 +160,39 @@ class _UploadVideoPageState extends State<UploadVideoPage> {
                     Column(
                       children: [
                         SizedBox(height: 60),
-                        is_uploaded?Container(
-                          width: 250,
-                          height: 150,
-                          decoration: BoxDecoration(
-                            color: ThirdColor,
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          child: Center(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Icon(
-                                  Icons.cloud_done,
-                                  size: 70,
-                                  color: Color(0xFFFFFFFF),
-                                ),
-                                SizedBox(height: 10),
-                                Text(
-                                  'File Uploaded Successfully',
-                                  style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ):
-                            is_uploading?
-                            Container(
-                              width: 250,
-                              height: 150,
-                              decoration: BoxDecoration(
-                                color: ThirdColor,
-                                borderRadius: BorderRadius.circular(15),
-                              ),
-                              child: Center(
-                                  child:Text('Uploading .... '
-                                  ,style: TextStyle(
-                                      fontSize: 20,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w600
-                                    ),
-                                  )
-                              )
-                            ):
+
 
                         GestureDetector(
                           onTap: () async {
                             // Logic to upload video/audio files
                             // await uploud_video(context);
-                            startWebFilePicker();
+
+                            await  pickVideoFile().then((response) async {
+                              if (response.data != null) {
+                                await Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        ResultScreen(
+                                          results: {
+                                            'ar_script': response.data.arScript ?? '',
+                                            'en_script': response.data!.enScrip ??'',
+                                            'ar_summary': response.data!.arSummary ??'',
+                                            'en_summary': response.data!.enSummary??'',
+                                            'transcript_with_time_stamp': response.data!.scriptTime??''
+                                          },
+
+                                          color: FirstColor,
+                                        ),
+                                  ),
+                                );
+                              }
+                            }
+                            ).catchError((e){
+                              setState(() {
+                                is_loading = false;
+                              });
+                            });
                           },
                           child: Container(
                             width: 250,
@@ -217,74 +220,10 @@ class _UploadVideoPageState extends State<UploadVideoPage> {
                             ),
                           ),
                         ),
-                        SizedBox(height: 40),
-                        is_uploaded?
-                        ElevatedButton(onPressed: () async {
-                          // Logic to start transcription
-                          setState(() {
-                            is_loading = true;
-                          });
-                          if (_selectedFile == null) {
-                            if (kDebugMode) {
-                              print('No file selected');
-                            }
-                            setState(() {
-                              is_loading = false;
-                            });
-                            return;
-                          }
-                          setState(() {
-                            is_loading=true;
-                          });
-                        await  uploadVideo(_selectedFile).then((response) async {
-                            if (response != null) {
-                             await Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      ResultScreen(
-                                        results: {
-                                          'ar_script': response.data!.arScript!,
-                                          'en_script': response.data!.enScript!,
-                                          'ar_summary': response.data!.arSummary!,
-                                          'en_summary': response.data!.enSummary!,
-                                          'transcript_with_time_stamp': response.data!.scriptTime!
-                                        },
-
-                                        color: FirstColor,
-                                      ),
-                                ),
-                              );
-                            }
-                          }
-                          ).catchError((e){
-                            setState(() {
-                              is_loading = false;
-                            });
-                          })
-                              .whenComplete(() {
-                            setState(() {
-                              is_loading = false;
-                            });
-                          });
-
-                        }, child: Text('Start Transcription',style: TextStyle(color: Colors.white),),style: ElevatedButton.styleFrom(
-                          backgroundColor: FirstColor,
 
 
-                          padding: EdgeInsets.symmetric(horizontal: 40, vertical: 20),
-                          textStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
 
-
-                        ),
-                        ):
-                        Container(),
-
-
-                        SizedBox(height: 80),
+                        SizedBox(height: 120),
                         Text(
                           '© 2023 Atlas Transcription',
                           style: TextStyle(color: Color(0xFF5B0888)),
@@ -294,63 +233,14 @@ class _UploadVideoPageState extends State<UploadVideoPage> {
                 ]
               ),
             ),
-                  );
-          }
+                  )
+
         ),
-    )
+
     );
   }
 
-  // Future<void> uploud_video(BuildContext context) async {
-  //    // Logic to upload video/audio files
-  //   await pickVideoFile().then(( value){
-  //
-  //     setState(() {
-  //       is_uploaded = true;
-  //     });
-  //     if (value == null) {
-  //       if (kDebugMode) {
-  //         print('No file selected');
-  //       }
-  //
-  //       setState(() {
-  //         is_uploaded = false;
-  //       });
-  //       return;
-  //     }
-  //
-  //     ApiService().uploadStream(value).then((response) {
-  //       setState(() {
-  //         is_loading = true;
-  //       });
-  //       return Navigator.of(context).push(
-  //           MaterialPageRoute(builder: (context)=>ResultScreen(
-  //             results: {
-  //               'ar_script': response.data!.arScript!,
-  //               'en_script': response.data!.enScript!,
-  //               'ar_summary': response.data!.arSummary!,
-  //               'en_summary': response.data!.enSummary!,
-  //               'transcript_with_time_stamp': response.data!.scriptTime!
-  //             },
-  //
-  //             color: AudioUploadPattern.secondColor,
-  //           )
-  //           )
-  //       );
-  //     }).catchError((e){
-  //       debugPrint(e);
-  //       setState(() {
-  //         is_loading = false;
-  //       });
-  //     });
-  //
-  //   }).catchError((e){
-  //     debugPrint(e.toString());
-  //     setState(() {
-  //       is_loading = false;
-  //     });
-  //   });
-  // }
+
 
   void showSnackBar(String s, {required bool isError}) {
     ScaffoldMessenger.of(context).showSnackBar(

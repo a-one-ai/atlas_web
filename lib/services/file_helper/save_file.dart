@@ -22,3 +22,26 @@ void saveToFile(String fileName, String content) {
   // Clean up by revoking the URL
   html.Url.revokeObjectUrl(url);
 }
+
+
+String generateSrt(List scriptTime) {
+  String srtContent = '';
+  int count = 1;
+
+  for (String timestampLine in scriptTime) {
+    List<String> parts = timestampLine.split('   ');
+    String timestamps = parts[0];
+    String dialogue = parts[1];
+    List<String> timeRange = timestamps.split(' - ');
+
+    srtContent += '$count\n';
+    srtContent +=
+    '${timeRange[0].replaceFirst('.', ',')} --> ${timeRange[1].replaceFirst('.', ',')}\n';
+    srtContent += '${dialogue.trim()}\n\n';
+    count++;
+  }
+
+  return srtContent;
+}
+
+

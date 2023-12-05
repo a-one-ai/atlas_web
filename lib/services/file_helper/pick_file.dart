@@ -1,5 +1,5 @@
 import 'dart:typed_data';
-import 'dart:html' as html;
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http_parser/http_parser.dart';
 import 'dart:convert';
@@ -11,17 +11,48 @@ import '../../model/res_model.dart';
 import '../api/api_helper.dart';
 
 
+pickVideoFile() async {
+  FilePickerResult? result = await FilePicker.platform.pickFiles(
+    type: FileType.video,
+    allowMultiple: false,
+  );
+
+  if (result != null) {
+    PlatformFile file = result.files.first;
+
+    var res=await uploadVideo(file);
+
+    return res;
+  } else {
+    return null;
+  }
+}
+
+pickAudioFile() async {
+  FilePickerResult? result = await FilePicker.platform.pickFiles(
+    type: FileType.audio,
+    allowMultiple: false,
+  );
+
+  if (result != null) {
+    PlatformFile file = result.files.first;
+    var res=await uploadAudio(file);
+    return res;
+  }
+}
+
 
 Future uploadAudio(
-    selectedFile
+    PlatformFile selectedFile
     ) async {
   if (kDebugMode) {
     print('uploading audio on server');
   }
   var url = Uri.parse(Mainurl+"/getAudioFile");
   var request = http.MultipartRequest("POST", url);
-  request.files.add(http.MultipartFile.fromBytes('audio', selectedFile!,
-      contentType: MediaType('multipart', 'form-data'), filename: selectedFile.name));
+  var audioFile=await http.MultipartFile.fromBytes('audio', selectedFile.bytes!,
+      contentType: MediaType('multipart', 'form-data'), filename: selectedFile.name);
+  request.files.add(audioFile);
 
   try {
     request.send().then((response) async {
@@ -50,12 +81,13 @@ Future uploadAudio(
 }
 
 uploadVideo(
-    selectedFile
+    PlatformFile selectedFile
     ) async {
   var url = Uri.parse(Mainurl+"/getVideoFile");
   var request = http.MultipartRequest("POST", url);
-  request.files.add(http.MultipartFile.fromBytes('video', selectedFile!,
-      contentType: MediaType('multipart', 'form-data'), filename: selectedFile.name));
+  var videoFile=await http.MultipartFile.fromBytes('video', selectedFile.bytes!,
+      contentType: MediaType('multipart', 'form-data'), filename: selectedFile.name);
+  request.files.add(videoFile);
 
   request.send().then((response) async {
     if (response.statusCode == 200) {
