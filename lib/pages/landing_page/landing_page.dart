@@ -77,7 +77,7 @@ class LandingPage extends StatelessWidget {
                                     onPressed: () {
                                       Navigator.of(context)
                                           .push(MaterialPageRoute(
-                                          builder: (context) =>HomeScreen()
+                                          builder: (context) =>const HomeScreen()
                                       ));
                                     },
                                     style: ElevatedButton.styleFrom(
@@ -178,7 +178,7 @@ class LandingPage extends StatelessWidget {
                                     onPressed: () {
                                       Navigator.of(context)
                                           .push(MaterialPageRoute(
-                                          builder: (context) =>HomeScreen()
+                                          builder: (context) =>const HomeScreen()
                                       ));
                                     },
                                     style: ElevatedButton.styleFrom(

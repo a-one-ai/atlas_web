@@ -10,7 +10,8 @@ import 'widget/button_feature.dart';
 
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key});
+  const HomeScreen({super.key});
+
 
   @override
   Widget build(BuildContext context) {
@@ -35,20 +36,20 @@ class HomeScreen extends StatelessWidget {
               children: [
                 Center(
                   child: SingleChildScrollView(
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 40),
+                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
                     child: Wrap(
                       spacing: 20,
                       runSpacing: 40,
                       alignment: isWideScreen ? WrapAlignment.center : WrapAlignment.start,
                       children: [
-                        FeatureWidget(
+                        const FeatureWidget(
                           title: 'Video',
                           icon: Icons.slow_motion_video,
                           textColor: Colors.white,
                           bgColor: Color(0xFF833AB4),
                           route: UploadVideoPage(),
                         ),
-                        FeatureWidget(
+                        const FeatureWidget(
                           title: 'Link',
                           icon: Icons.stream,
                           textColor: Colors.white,
@@ -59,7 +60,7 @@ class HomeScreen extends StatelessWidget {
                           title: 'Audio',
                           icon: Icons.multitrack_audio_rounded,
                           textColor: Colors.white,
-                          bgColor: Color(0xFFB46D3A),
+                          bgColor: const Color(0xFFB46D3A),
                           route: UploadAudioPage(),
 
                         ),

@@ -1,11 +1,9 @@
-import 'dart:typed_data';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http_parser/http_parser.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-import 'package:flutter/material.dart';
 
 import '../../model/res_model.dart';
 import '../api/api_helper.dart';
@@ -48,9 +46,9 @@ Future uploadAudio(
   if (kDebugMode) {
     print('uploading audio on server');
   }
-  var url = Uri.parse(Mainurl+"/getAudioFile");
+  var url = Uri.parse("$Mainurl/getAudioFile");
   var request = http.MultipartRequest("POST", url);
-  var audioFile=await http.MultipartFile.fromBytes('audio', selectedFile.bytes!,
+  var audioFile=http.MultipartFile.fromBytes('audio', selectedFile.bytes!,
       contentType: MediaType('multipart', 'form-data'), filename: selectedFile.name);
   request.files.add(audioFile);
 
@@ -83,9 +81,9 @@ Future uploadAudio(
 uploadVideo(
     PlatformFile selectedFile
     ) async {
-  var url = Uri.parse(Mainurl+"/getVideoFile");
+  var url = Uri.parse("$Mainurl/getVideoFile");
   var request = http.MultipartRequest("POST", url);
-  var videoFile=await http.MultipartFile.fromBytes('video', selectedFile.bytes!,
+  var videoFile=http.MultipartFile.fromBytes('video', selectedFile.bytes!,
       contentType: MediaType('multipart', 'form-data'), filename: selectedFile.name);
   request.files.add(videoFile);
 

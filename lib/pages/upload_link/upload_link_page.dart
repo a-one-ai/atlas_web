@@ -14,7 +14,7 @@ import '../result/result_page.dart';
 
 
 class UploadLinkPage extends StatefulWidget {
-  UploadLinkPage({
+  const UploadLinkPage({
     Key? key,
 
   }) : super(key: key);
@@ -62,14 +62,14 @@ class _UploadLinkPageState extends State<UploadLinkPage> {
           toolbarHeight: 100,
         ),
         backgroundColor: Colors.transparent,
-        body: Container(
+        body: SizedBox(
           width: double.infinity,
           child: SingleChildScrollView(
-            padding: EdgeInsets.all(40),
+            padding: const EdgeInsets.all(40),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                SizedBox(height: 40),
+                const SizedBox(height: 40),
                 Text(
                   'Atlas Transcription',
                   style: TextStyle(
@@ -77,26 +77,26 @@ class _UploadLinkPageState extends State<UploadLinkPage> {
                       fontWeight: FontWeight.bold,
                       color: LinkUploudPattern.firstColor),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Text(
                   'Transcribe your audio/video with ease!',
                   style: TextStyle(fontSize: 20, color: LinkUploudPattern.secondColor),
                 ),
-                SizedBox(height: 60),
+                const SizedBox(height: 60),
                 is_loading ? LoadingAnimationWidget.dotsTriangle(
                   color:LinkUploudPattern.thirdColor,
                   size: 200,
                 ) :
                 Column(
                   children: [
-                    Container(
+                    SizedBox(
                       width: 600,
                       child: TextFormField(
                         controller: _streamLink,
                         decoration: InputDecoration(
                           hintText: 'Enter a Video Link',
                           border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(
+                            borderRadius: const BorderRadius.all(
                               Radius.circular(20),
                             ),
                             borderSide: BorderSide(
@@ -119,7 +119,7 @@ class _UploadLinkPageState extends State<UploadLinkPage> {
                         },
                       ),
                     ),
-                    SizedBox(height: 40),
+                    const SizedBox(height: 40),
                     ElevatedButton(
                       // onPressed: (){
                       //   Navigator.of(context).push(
@@ -138,25 +138,25 @@ class _UploadLinkPageState extends State<UploadLinkPage> {
                       //   );
                       // },
                        onPressed:startTranscription,
-                      child:Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
-                        child: Text(
-                          'Start Transcription',
-                          style: TextStyle(fontSize: 20, color: Color(0xFFFAF1E4)),
-                        ),
-                      ),
                       style: ElevatedButton.styleFrom(
                         foregroundColor: Colors.black, backgroundColor:
                       url_valid?
                       LinkUploudPattern.secondColor:
                           LinkUploudPattern.fourColor
                       ),
+                      child:const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+                        child: Text(
+                          'Start Transcription',
+                          style: TextStyle(fontSize: 20, color: Color(0xFFFAF1E4)),
+                        ),
+                      ),
                     ),
                   ],
                 ),
-                SizedBox(height: 60),
+                const SizedBox(height: 60),
 
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Text(
                   '© 2023 Atlas Transcription',
                   style: TextStyle(color: LinkUploudPattern.thirdColor),

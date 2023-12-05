@@ -25,9 +25,9 @@ class ResultCard extends StatelessWidget {
         border: Border.all(color: color, width: 5),
         borderRadius: BorderRadius.circular(10),
       ),
-      margin: EdgeInsets.symmetric(vertical: 10),
+      margin: const EdgeInsets.symmetric(vertical: 10),
       child: Padding(
-        padding: EdgeInsets.all(15),
+        padding: const EdgeInsets.all(15),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -35,19 +35,19 @@ class ResultCard extends StatelessWidget {
             children: <Widget>[
               Text(
                 title,
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black),
+                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Text(
                 content,
-                style: TextStyle(fontSize: 16, color: Colors.black,
+                style: const TextStyle(fontSize: 16, color: Colors.black,
 
                 ),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(height: 20,),
+              const SizedBox(height: 20,),
               IconButton(
-                icon: Icon(Icons.file_download_outlined, color: Colors.black),
+                icon: const Icon(Icons.file_download_outlined, color: Colors.black),
                 onPressed: () {
                   // Logic to save file
                   var name = title.replaceAll(' ', '_').toLowerCase();

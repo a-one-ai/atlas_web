@@ -3,7 +3,7 @@ class SummaryResponse {
 
   SummaryResponse({Data? data}) {
     if (data != null) {
-      this._data = data;
+      _data = data;
     }
   }
 
@@ -11,13 +11,13 @@ class SummaryResponse {
   set data(Data? data) => _data = data;
 
   SummaryResponse.fromJson(Map<String, dynamic> json) {
-    _data = json['data'] != null ? new Data.fromJson(json['data']) : null;
+    _data = json['data'] != null ? Data.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this._data != null) {
-      data['data'] = this._data!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (_data != null) {
+      data['data'] = _data!.toJson();
     }
     return data;
   }
@@ -37,19 +37,19 @@ class Data {
         String? enSummary,
         List? scriptTime}) {
     if (arScript != null) {
-      this._arScript = arScript;
+      _arScript = arScript;
     }
     if (arSummary != null) {
-      this._arSummary = arSummary;
+      _arSummary = arSummary;
     }
     if (enScript != null) {
-      this._enScript = enScript;
+      _enScript = enScript;
     }
     if (enSummary != null) {
-      this._enSummary = enSummary;
+      _enSummary = enSummary;
     }
     if (scriptTime != null) {
-      this._scriptTime = scriptTime;
+      _scriptTime = scriptTime;
     }
   }
 
@@ -73,12 +73,12 @@ class Data {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['ar_script'] = this._arScript;
-    data['ar_summary'] = this._arSummary;
-    data['en_script'] = this._enScript;
-    data['en_summary'] = this._enSummary;
-    data['script_time'] = this._scriptTime;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['ar_script'] = _arScript;
+    data['ar_summary'] = _arSummary;
+    data['en_script'] = _enScript;
+    data['en_summary'] = _enSummary;
+    data['script_time'] = _scriptTime;
     return data;
   }
 }

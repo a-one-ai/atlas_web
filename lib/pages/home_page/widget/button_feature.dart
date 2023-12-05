@@ -33,7 +33,7 @@ class FeatureWidget extends StatelessWidget {
               color: Colors.black.withOpacity(0.3),
               spreadRadius: 2,
               blurRadius: 5,
-              offset: Offset(0, 3),
+              offset: const Offset(0, 3),
             ),
           ],
           gradient: LinearGradient(
@@ -47,7 +47,7 @@ class FeatureWidget extends StatelessWidget {
           children: [
             Positioned.fill(
               child: AnimatedContainer(
-                duration: Duration(seconds: 1),
+                duration: const Duration(seconds: 1),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: Colors.white.withOpacity(0.2),
@@ -65,7 +65,7 @@ class FeatureWidget extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Icon(
                   icon,
                   size: 50,

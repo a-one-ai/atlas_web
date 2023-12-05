@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 
 
 
-import '../../../core/colors/colors_manager.dart';
 import '../../services/file_helper/save_file.dart';
 import '../../widgets/background.dart';
 import '../../widgets/top_menu.dart';
@@ -14,7 +13,7 @@ class ResultScreen extends StatefulWidget {
   final Map<String, dynamic> results;
   final Color color;
 
-  ResultScreen({required this.results, required this.color});
+  const ResultScreen({super.key, required this.results, required this.color});
 
   @override
   State<ResultScreen> createState() => _ResultScreenState();
@@ -85,7 +84,7 @@ class _ResultScreenState extends State<ResultScreen> with SingleTickerProviderSt
           // Assuming TopMenu is a custom widget for the title
           centerTitle: true,
           bottom: PreferredSize(
-            preferredSize: Size.fromHeight(50),
+            preferredSize: const Size.fromHeight(50),
             child: TabBar(
               controller: _tabController,
               isScrollable: true,
@@ -103,20 +102,20 @@ class _ResultScreenState extends State<ResultScreen> with SingleTickerProviderSt
           ),
         ),
         body: SingleChildScrollView(
-          padding: EdgeInsets.all(20),
+          padding: const EdgeInsets.all(20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               resultCards[_tabController.index],
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
                   // Logic to save files and generate STR
                   saveToFile('output.srt', srtContent);
 
                 },
-                child: Text('Save Subtitle File '),
+                child: const Text('Save Subtitle File '),
               ),
             ],
           ),
@@ -129,7 +128,7 @@ class _ResultScreenState extends State<ResultScreen> with SingleTickerProviderSt
     return Tab(
       child: Text(
         title,
-        style: TextStyle(fontSize: 18),
+        style: const TextStyle(fontSize: 18),
       ),
     );
   }
