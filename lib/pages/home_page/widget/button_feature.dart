@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class FeatureWidget extends StatelessWidget {
   final String title;
-  final IconData icon;
+  final String icon;
   final Color textColor;
   final Color bgColor;
   final Widget route;
@@ -66,10 +67,12 @@ class FeatureWidget extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 20),
-                Icon(
+                SvgPicture.asset(
                   icon,
-                  size: 50,
-                  color: textColor,
+                  fit: BoxFit.contain,
+                  width: 50,
+                  height: 50,
+
                 ),
               ],
             ),

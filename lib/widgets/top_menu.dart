@@ -32,13 +32,16 @@ class TopMenu extends StatelessWidget {
 
                   Row(
                     children: [
-                      Image.asset('assets/icons/finnace.png',color: iconColor,),
-                      const SizedBox(width: 10),
+                      Image.network('https://firebasestorage.googleapis.com/v0/b/todo-33828.appspot.com/o/android-chrome-512x512.png?alt=media&token=45216c4b-f133-4c69-a958-d2cf87f620b4',
+height: 40,
+width: 40,
+                        color: iconColor,),
+                       SizedBox(width: 10),
                       Text(
                         'ATLAS',
                         style: TextStyle(
                             color: kTitleColor,
-                            fontSize: size.width * 0.02,
+                          
                             fontWeight: FontWeight.w600),
                       )
                     ],

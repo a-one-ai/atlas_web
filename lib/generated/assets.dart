@@ -3,10 +3,15 @@ class Assets {
   Assets._();
 
   static const String fontsArial = 'assets/fonts/arial.ttf';
+  static const String iconsCloudUploadWhite24dp = 'assets/icons/cloud_upload_white_24dp.svg';
+  static const String iconsDownloadingBlack24dp = 'assets/icons/downloading_black_24dp.svg';
   static const String iconsFacebook = 'assets/icons/facebook.png';
   static const String iconsFinnace = 'assets/icons/finnace.png';
+  static const String iconsGraphicEqWhite24dp = 'assets/icons/graphic_eq_white_24dp.svg';
   static const String iconsMedium = 'assets/icons/medium.png';
   static const String iconsMenu = 'assets/icons/menu.png';
+  static const String iconsPlayCircleOutlineWhite24dp = 'assets/icons/play_circle_outline_white_24dp.svg';
+  static const String iconsStreamWhite24dp = 'assets/icons/stream_white_24dp.svg';
   static const String iconsTwitter = 'assets/icons/twitter.png';
   static const String imageHeroImg = 'assets/image/hero-img.png';
   static const String imageIll1 = 'assets/image/ill1.png';

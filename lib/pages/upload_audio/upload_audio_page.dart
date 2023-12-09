@@ -1,6 +1,7 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import 'package:http_parser/http_parser.dart';
@@ -192,17 +193,19 @@ class _UploadAudioPageState extends State<UploadAudioPage> {
                                 color: widget.ThirdColor,
                                 borderRadius: BorderRadius.circular(15),
                               ),
-                              child: const Center(
+                              child:  Center(
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: <Widget>[
-                                    Icon(
-                                      Icons.cloud_upload,
-                                      size: 70,
-                                      color: Color(0xFFFFFFFF),
+                                    SvgPicture.asset(
+                                      'assets/icons/cloud_upload_white_24dp.svg',
+                                      width: 70,
+                                      height:70,
+                                      color: Colors.white,
+
                                     ),
-                                    SizedBox(height: 10),
-                                    Text(
+                                    const SizedBox(height: 10),
+                                    const Text(
                                       'Drag & Drop or Click to Upload',
                                       style: TextStyle(
                                           fontSize: 14,

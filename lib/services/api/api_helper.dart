@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 
 import '../../model/res_model.dart';
 
-String Mainurl = 'http://184.105.215.243:8000';
+String Mainurl = 'http://184.105.208.147:8000';
 Future uploadStream(String text) async {
   //http://90fb-34-125-113-217.ngrok.io/summarize_video
   // var request = http.MultipartRequest('POST', Uri.parse('http://90fb-34-125-113-217.ngrok.io/summarize_video'));

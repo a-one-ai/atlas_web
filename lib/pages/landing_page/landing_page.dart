@@ -41,8 +41,8 @@ class LandingPage extends StatelessWidget {
                     child: Stack(
                       children: [
                         if (size.width > 600)
-                          Image.asset(
-                            'assets/image/ill1.png',
+                          Image.network(
+                           "https://firebasestorage.googleapis.com/v0/b/todo-33828.appspot.com/o/ill1.png?alt=media&token=6d6fc581-1c61-4f8f-874f-33f26e5c60b0",
                             color: Colors.deepPurple,
                           ),
                         Padding(
@@ -58,6 +58,7 @@ class LandingPage extends StatelessWidget {
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: size.width * 0.03,
+
                                   color: kTitleColor,
                                 ),
                               ),
@@ -66,7 +67,7 @@ class LandingPage extends StatelessWidget {
                                 subtitle,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w600,
-                                  fontSize: size.width * 0.014,
+
                                   color: kTextColor,
                                 ),
                               ),
@@ -89,10 +90,10 @@ class LandingPage extends StatelessWidget {
                                           borderRadius:
                                           BorderRadius.circular(50)),
                                     ),
-                                    child: Text(
+                                    child: const Text(
                                       'Get Started',
                                       style: TextStyle(
-                                        fontSize: size.width * 0.01,
+                                        // fontSize: size.width * 0.01,
                                         color: Colors.white,
                                       ),
                                     ),
@@ -109,16 +110,20 @@ class LandingPage extends StatelessWidget {
                     ),
                   ),
                   Expanded(
-                    child: Container(
-                      decoration: const BoxDecoration(
-                        color: Color(0xffF5F5F5),
-                        image: DecorationImage(
-                          image: AssetImage(
-                            'assets/image/hero-img.png',
-                          ),
-                        ),
-                      ),
+                    child: Image.network(
+                      'https://firebasestorage.googleapis.com/v0/b/todo-33828.appspot.com/o/hero-img.png?alt=media&token=812fb793-ed05-4797-a495-3e1362a2c14d',
+                      fit: BoxFit.cover,
                     ),
+                    // child: Container(
+                    //   decoration:  BoxDecoration(
+                    //     color: Color(0xffF5F5F5),
+                    //     image: DecorationImage(
+                    //       image: NetworkImage(
+                    //         'https://images.unsplash.com/photo-1622837137197-4b7b2b5b5b0f?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dmlkZW8lMjB0cmFuc2NyaXB0aW9ufGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80',
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
                   )
                 ],
               ),
@@ -127,33 +132,37 @@ class LandingPage extends StatelessWidget {
               child: Column(
                 children: [
                   Expanded(
-                    child: Container(
-                      decoration: const BoxDecoration(
-                        color: Color(0xffF5F5F5),
-                        image: DecorationImage(
-                          image: AssetImage(
-                            'assets/image/hero-img.png',
-                          ),
-                        ),
-                      ),
+                    // child: Container(
+                    //   decoration:  BoxDecoration(
+                    //     color: Color(0xffF5F5F5),
+                    //     image: DecorationImage(
+                    //       image: AssetImage(
+                    //         'assets/image/hero-img.png',
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
+                    child: Image.network(
+                      'https://firebasestorage.googleapis.com/v0/b/todo-33828.appspot.com/o/hero-img.png?alt=media&token=812fb793-ed05-4797-a495-3e1362a2c14d',
+                      fit: BoxFit.cover,
                     ),
                   ),
                   Expanded(
                     child: Stack(
                       children: [
                         if (size.width > 600)
-                          Image.asset(
-                            'assets/image/ill1.png',
+                          Image.network(
+                           "https://firebasestorage.googleapis.com/v0/b/todo-33828.appspot.com/o/ill1.png?alt=media&token=6d6fc581-1c61-4f8f-874f-33f26e5c60b0",
                             color: Colors.deepPurple,
                           ),
                         Padding(
                           padding: EdgeInsets.symmetric(
                               horizontal: size.width * 0.08),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                          child: ListView(
+                            // mainAxisAlignment: MainAxisAlignment.center,
+                            // crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Spacer(),
+                               Spacer(),
                               Text(
                                 'ATLAS TRANSCRIPTION',
                                 style: TextStyle(
@@ -167,7 +176,7 @@ class LandingPage extends StatelessWidget {
                                 subtitle,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w600,
-                                  fontSize: size.width * 0.014,
+                                  fontSize: size.width * 0.03,
                                   color: kTextColor,
                                 ),
                               ),
@@ -178,7 +187,7 @@ class LandingPage extends StatelessWidget {
                                     onPressed: () {
                                       Navigator.of(context)
                                           .push(MaterialPageRoute(
-                                          builder: (context) =>const HomeScreen()
+                                          builder: (context) => const HomeScreen()
                                       ));
                                     },
                                     style: ElevatedButton.styleFrom(
@@ -193,14 +202,14 @@ class LandingPage extends StatelessWidget {
                                     child: Text(
                                       'Get Started',
                                       style: TextStyle(
-                                        fontSize: size.width * 0.01,
+                                        fontSize: size.width * 0.03,
                                         color: Colors.white,
                                       ),
                                     ),
                                   ),
                                 ],
                               ),
-                              const Spacer(
+                               const Spacer(
                                 flex: 2,
                               ),
                             ],
