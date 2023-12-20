@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../core/colors/colors_manager.dart';
 import '../../../services/file_helper/save_file.dart';
@@ -47,7 +48,10 @@ class ResultCard extends StatelessWidget {
               ),
               const SizedBox(height: 20,),
               IconButton(
-                icon: const Icon(Icons.file_download_outlined, color: Colors.black),
+                icon: SvgPicture.asset(
+                  'assets/icons/cloud_download_black_24dp.svg',
+
+                ),
                 onPressed: () {
                   // Logic to save file
                   var name = title.replaceAll(' ', '_').toLowerCase();

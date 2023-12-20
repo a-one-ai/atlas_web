@@ -1,6 +1,7 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import '../../../core/colors/colors_manager.dart';
@@ -35,7 +36,7 @@ class _UploadVideoPageState extends State<UploadVideoPage> {
   bool is_loading = false;
 
   Future<SummaryResponse?> uploadVideo(PlatformFile selectedFile) async {
-    var url = Uri.parse("$Mainurl/getVideoFile");
+    var url = Uri.parse("$mainUrl/getVideoFile");
     var request = http.MultipartRequest("POST", url);
     var videoFile = http.MultipartFile.fromBytes(
         'video', selectedFile.bytes!,
@@ -84,7 +85,7 @@ class _UploadVideoPageState extends State<UploadVideoPage> {
               'en_script': response.data?.enScript ?? '',
               'ar_summary': response.data?.arSummary ?? '',
               'en_summary': response.data?.enSummary ?? '',
-              'transcript_with_time_stamp': response.data?.scriptTime ?? ''
+            
             },
             color: FirstColor,
           ),
@@ -119,7 +120,7 @@ class _UploadVideoPageState extends State<UploadVideoPage> {
                     Text(
                       'Atlas Transcription',
                       style: TextStyle(
-                          fontSize: 48,
+                          fontSize: 40,
                           fontWeight: FontWeight.bold,
                           color: FirstColor),
                     ),
@@ -170,7 +171,11 @@ class _UploadVideoPageState extends State<UploadVideoPage> {
                                       setState(() {
                                         is_loading = true;
                                       });
-                                      await uploadVideo(file);
+                                      await uploadVideo(file).catchError((e) {
+                                        setState(() {
+                                          is_loading = false;
+                                        });
+                                      });
                                     }
                                   }).catchError((e) {
                                     setState(() {
@@ -185,18 +190,19 @@ class _UploadVideoPageState extends State<UploadVideoPage> {
                                     color: ThirdColor,
                                     borderRadius: BorderRadius.circular(15),
                                   ),
-                                  child: const Center(
+                                  child:  Center(
                                     child: Column(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: <Widget>[
-                                        Icon(
-                                          Icons.cloud_upload,
-                                          size: 70,
-                                          color: Color(0xFFFFFFFF),
+                                    SvgPicture.asset(
+                                          'assets/icons/cloud_upload_white_24dp.svg',
+                                          width: 70,
+                                          height:70,
+
                                         ),
-                                        SizedBox(height: 10),
-                                        Text(
+                                        const SizedBox(height: 10),
+                                        const Text(
                                           'Drag & Drop or Click to Upload',
                                           style: TextStyle(
                                               fontSize: 14,

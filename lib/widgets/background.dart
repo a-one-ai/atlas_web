@@ -23,7 +23,7 @@ width: size.width,
           // if (size.width > 600)
            Positioned(
              bottom: 0,
-             child: Image.asset('assets/image/ill1.png', color: Colors.deepPurple,
+             child: Image.network('https://firebasestorage.googleapis.com/v0/b/todo-33828.appspot.com/o/ill1.png?alt=media&token=6d6fc581-1c61-4f8f-874f-33f26e5c60b0', color: Colors.deepPurple,
              fit: BoxFit.cover,
 
              ),

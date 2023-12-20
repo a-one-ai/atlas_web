@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 
 
-import '../../services/file_helper/save_file.dart';
+// import '../../services/file_helper/save_file.dart';
 import '../../widgets/background.dart';
 import '../../widgets/top_menu.dart';
 
@@ -47,7 +47,7 @@ class _ResultScreenState extends State<ResultScreen> with SingleTickerProviderSt
 
   @override
   Widget build(BuildContext context) {
-    var srtContent = generateSrt(widget.results['transcript_with_time_stamp']);
+    // var srtContent = generateSrt(widget.results['transcript_with_time_stamp']);
     List<Widget> resultCards = [
       ResultCard(
         title: 'Arabic Transcription',
@@ -63,9 +63,7 @@ class _ResultScreenState extends State<ResultScreen> with SingleTickerProviderSt
       ResultCard(title: 'English Summary',
         content: widget.results['en_summary'] ?? '',
         color: widget.color,),
-      ResultCard(title: 'Transcription with Timestamp',
-        content:srtContent.toString()??'',
-        color: widget.color,),
+
     ];
 
     var size = MediaQuery
@@ -96,7 +94,7 @@ class _ResultScreenState extends State<ResultScreen> with SingleTickerProviderSt
                 _buildTab("English Transcription"),
                 _buildTab("Arabic Summary"),
                 _buildTab("English Summary"),
-                _buildTab("Transcription with Timestamp"),
+         
               ],
             ),
           ),
@@ -109,14 +107,14 @@ class _ResultScreenState extends State<ResultScreen> with SingleTickerProviderSt
               const SizedBox(height: 20),
               resultCards[_tabController.index],
               const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  // Logic to save files and generate STR
-                  saveToFile('output.srt', srtContent);
+              // ElevatedButton(
+              //   onPressed: () {
+              //     // Logic to save files and generate STR
+              //     saveToFile('output.srt', srtContent);
 
-                },
-                child: const Text('Save Subtitle File '),
-              ),
+              //   },
+              //   child: const Text('Save Subtitle File '),
+              // ),
             ],
           ),
         ),

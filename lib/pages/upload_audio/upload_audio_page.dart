@@ -1,6 +1,7 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import 'package:http_parser/http_parser.dart';
@@ -34,20 +35,19 @@ class _UploadAudioPageState extends State<UploadAudioPage> {
   var response;
 
   _navigateToResult(SummaryResponse response) => Navigator.push(
-    context,
-    MaterialPageRoute(
-      builder: (context) => ResultScreen(
-        results: {
-          'ar_script': response.data?.arScript ?? '',
-          'en_script': response.data?.enScript ?? '',
-          'ar_summary': response.data?.arSummary ?? '',
-          'en_summary': response.data?.enSummary ?? '',
-          'transcript_with_time_stamp': response.data?.scriptTime ?? ''
-        },
-        color: AudioUploadPattern.firstColor,
-      ),
-    ),
-  );
+        context,
+        MaterialPageRoute(
+          builder: (context) => ResultScreen(
+            results: {
+              'ar_script': response.data?.arScript ?? '',
+              'en_script': response.data?.enScript ?? '',
+              'ar_summary': response.data?.arSummary ?? '',
+              'en_summary': response.data?.enSummary ?? '',
+            },
+            color: AudioUploadPattern.firstColor,
+          ),
+        ),
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -55,10 +55,9 @@ class _UploadAudioPageState extends State<UploadAudioPage> {
       if (kDebugMode) {
         print('uploading audio on server');
       }
-      var url = Uri.parse("$Mainurl/getAudioFile");
+      var url = Uri.parse("$mainUrl/getAudioFile");
       var request = http.MultipartRequest("POST", url);
-      var audioFile = http.MultipartFile.fromBytes(
-          'audio', selectedFile.bytes!,
+      var audioFile = http.MultipartFile.fromBytes('audio', selectedFile.bytes!,
           contentType: MediaType('multipart', 'form-data'),
           filename: selectedFile.name);
       request.files.add(audioFile);
@@ -70,7 +69,8 @@ class _UploadAudioPageState extends State<UploadAudioPage> {
             if (kDebugMode) {
               print('Server response: $responseBody');
             }
-            var summaryResponse = SummaryResponse.fromJson(json.decode(responseBody));
+            var summaryResponse =
+                SummaryResponse.fromJson(json.decode(responseBody));
 
             setState(() {
               is_loading = false;
@@ -80,14 +80,14 @@ class _UploadAudioPageState extends State<UploadAudioPage> {
             if (kDebugMode) {
               print('file upload failed');
               setState(() {
-                is_loading=false;
+                is_loading = false;
               });
             }
           }
         });
       } on Exception catch (e) {
         setState(() {
-          is_loading=false;
+          is_loading = false;
         });
         if (kDebugMode) {
           print(e.toString());
@@ -106,7 +106,7 @@ class _UploadAudioPageState extends State<UploadAudioPage> {
         setState(() {
           is_loading = true;
         });
-              var res = await uploadAudio(file);
+        var res = await uploadAudio(file);
         return res;
       }
     }
@@ -137,7 +137,7 @@ class _UploadAudioPageState extends State<UploadAudioPage> {
                 Text(
                   'Atlas Transcription',
                   style: TextStyle(
-                      fontSize: 48,
+                      fontSize: 40,
                       fontWeight: FontWeight.bold,
                       color: widget.FirstColor),
                 ),
@@ -172,18 +172,26 @@ class _UploadAudioPageState extends State<UploadAudioPage> {
                     : Column(
                         children: [
                           const SizedBox(height: 60),
-                          ElevatedButton(
-                            onPressed: () async {
+                          GestureDetector(
+                            onTap: () async {
                               // Logic to upload video/audio files
                               try {
-                               await pickAudioFile();
-
+                                await pickAudioFile().catchError((e) {
+                                  setState(() {
+                                    is_loading = false;
+                                  });
+                                  if (kDebugMode) {
+                                    print('Error: $e');
+                                  }
+                                });
                               } catch (e) {
                                 if (kDebugMode) {
                                   print('Error: $e');
                                 }
+                                setState(() {
+                                  is_loading = false;
+                                });
                               }
-
                             },
                             child: Container(
                               width: 250,
@@ -192,17 +200,18 @@ class _UploadAudioPageState extends State<UploadAudioPage> {
                                 color: widget.ThirdColor,
                                 borderRadius: BorderRadius.circular(15),
                               ),
-                              child: const Center(
+                              child: Center(
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: <Widget>[
-                                    Icon(
-                                      Icons.cloud_upload,
-                                      size: 70,
-                                      color: Color(0xFFFFFFFF),
+                                    SvgPicture.asset(
+                                      'assets/icons/cloud_upload_white_24dp.svg',
+                                      width: 70,
+                                      height: 70,
+                                      color: Colors.white,
                                     ),
-                                    SizedBox(height: 10),
-                                    Text(
+                                    const SizedBox(height: 10),
+                                    const Text(
                                       'Drag & Drop or Click to Upload',
                                       style: TextStyle(
                                           fontSize: 14,

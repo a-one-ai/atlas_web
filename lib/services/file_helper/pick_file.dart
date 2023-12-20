@@ -4,10 +4,8 @@ import 'package:http_parser/http_parser.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-
 import '../../model/res_model.dart';
 import '../api/api_helper.dart';
-
 
 pickVideoFile() async {
   FilePickerResult? result = await FilePicker.platform.pickFiles(
@@ -18,7 +16,7 @@ pickVideoFile() async {
   if (result != null) {
     PlatformFile file = result.files.first;
 
-    var res=await uploadVideo(file);
+    var res = await uploadVideo(file);
 
     return res;
   } else {
@@ -34,37 +32,32 @@ pickAudioFile() async {
 
   if (result != null) {
     PlatformFile file = result.files.first;
-    var res=await uploadAudio(file);
+    var res = await uploadAudio(file);
     return res;
   }
 }
 
-
-Future uploadAudio(
-    PlatformFile selectedFile
-    ) async {
+Future uploadAudio(PlatformFile selectedFile) async {
   if (kDebugMode) {
     print('uploading audio on server');
   }
-  var url = Uri.parse("$Mainurl/getAudioFile");
+  var url = Uri.parse("$mainUrl/getAudioFile");
   var request = http.MultipartRequest("POST", url);
-  var audioFile=http.MultipartFile.fromBytes('audio', selectedFile.bytes!,
-      contentType: MediaType('multipart', 'form-data'), filename: selectedFile.name);
+  var audioFile = http.MultipartFile.fromBytes('audio', selectedFile.bytes!,
+      contentType: MediaType('multipart', 'form-data'),
+      filename: selectedFile.name);
   request.files.add(audioFile);
 
   try {
     request.send().then((response) async {
       if (response.statusCode == 200) {
-
         var responseBody = await response.stream.bytesToString();
         if (kDebugMode) {
           print('Server response: $responseBody');
         }
-        var res= SummaryResponse.fromJson(json.decode(responseBody));
-
+        var res = SummaryResponse.fromJson(json.decode(responseBody));
 
         return res;
-
       } else {
         if (kDebugMode) {
           print('file upload failed');
@@ -78,13 +71,12 @@ Future uploadAudio(
   }
 }
 
-uploadVideo(
-    PlatformFile selectedFile
-    ) async {
-  var url = Uri.parse("$Mainurl/getVideoFile");
+uploadVideo(PlatformFile selectedFile) async {
+  var url = Uri.parse("$mainUrl/getVideoFile");
   var request = http.MultipartRequest("POST", url);
-  var videoFile=http.MultipartFile.fromBytes('video', selectedFile.bytes!,
-      contentType: MediaType('multipart', 'form-data'), filename: selectedFile.name);
+  var videoFile = http.MultipartFile.fromBytes('video', selectedFile.bytes!,
+      contentType: MediaType('multipart', 'form-data'),
+      filename: selectedFile.name);
   request.files.add(videoFile);
 
   request.send().then((response) async {
@@ -96,8 +88,7 @@ uploadVideo(
       if (kDebugMode) {
         print('Server response: $responseBody');
       }
-      var res= SummaryResponse.fromJson(json.decode(responseBody));
-
+      var res = SummaryResponse.fromJson(json.decode(responseBody));
 
       return res;
     } else {
