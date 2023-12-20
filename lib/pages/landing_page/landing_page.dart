@@ -162,7 +162,7 @@ class LandingPage extends StatelessWidget {
                             // mainAxisAlignment: MainAxisAlignment.center,
                             // crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                               Spacer(),
+                               const Spacer(),
                               Text(
                                 'ATLAS TRANSCRIPTION',
                                 style: TextStyle(

@@ -35,20 +35,19 @@ class _UploadAudioPageState extends State<UploadAudioPage> {
   var response;
 
   _navigateToResult(SummaryResponse response) => Navigator.push(
-    context,
-    MaterialPageRoute(
-      builder: (context) => ResultScreen(
-        results: {
-          'ar_script': response.data?.arScript ?? '',
-          'en_script': response.data?.enScript ?? '',
-          'ar_summary': response.data?.arSummary ?? '',
-          'en_summary': response.data?.enSummary ?? '',
-
-        },
-        color: AudioUploadPattern.firstColor,
-      ),
-    ),
-  );
+        context,
+        MaterialPageRoute(
+          builder: (context) => ResultScreen(
+            results: {
+              'ar_script': response.data?.arScript ?? '',
+              'en_script': response.data?.enScript ?? '',
+              'ar_summary': response.data?.arSummary ?? '',
+              'en_summary': response.data?.enSummary ?? '',
+            },
+            color: AudioUploadPattern.firstColor,
+          ),
+        ),
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -56,10 +55,9 @@ class _UploadAudioPageState extends State<UploadAudioPage> {
       if (kDebugMode) {
         print('uploading audio on server');
       }
-      var url = Uri.parse("$Mainurl/getAudioFile");
+      var url = Uri.parse("$mainUrl/getAudioFile");
       var request = http.MultipartRequest("POST", url);
-      var audioFile = http.MultipartFile.fromBytes(
-          'audio', selectedFile.bytes!,
+      var audioFile = http.MultipartFile.fromBytes('audio', selectedFile.bytes!,
           contentType: MediaType('multipart', 'form-data'),
           filename: selectedFile.name);
       request.files.add(audioFile);
@@ -71,7 +69,8 @@ class _UploadAudioPageState extends State<UploadAudioPage> {
             if (kDebugMode) {
               print('Server response: $responseBody');
             }
-            var summaryResponse = SummaryResponse.fromJson(json.decode(responseBody));
+            var summaryResponse =
+                SummaryResponse.fromJson(json.decode(responseBody));
 
             setState(() {
               is_loading = false;
@@ -81,14 +80,14 @@ class _UploadAudioPageState extends State<UploadAudioPage> {
             if (kDebugMode) {
               print('file upload failed');
               setState(() {
-                is_loading=false;
+                is_loading = false;
               });
             }
           }
         });
       } on Exception catch (e) {
         setState(() {
-          is_loading=false;
+          is_loading = false;
         });
         if (kDebugMode) {
           print(e.toString());
@@ -107,7 +106,7 @@ class _UploadAudioPageState extends State<UploadAudioPage> {
         setState(() {
           is_loading = true;
         });
-              var res = await uploadAudio(file);
+        var res = await uploadAudio(file);
         return res;
       }
     }
@@ -173,28 +172,26 @@ class _UploadAudioPageState extends State<UploadAudioPage> {
                     : Column(
                         children: [
                           const SizedBox(height: 60),
-                         GestureDetector(
-                                onTap: () async {
+                          GestureDetector(
+                            onTap: () async {
                               // Logic to upload video/audio files
                               try {
-                               await pickAudioFile().catchError((e) {
-                                setState(() {
-                                  is_loading=false;
-                                });
+                                await pickAudioFile().catchError((e) {
+                                  setState(() {
+                                    is_loading = false;
+                                  });
                                   if (kDebugMode) {
                                     print('Error: $e');
                                   }
                                 });
-
                               } catch (e) {
                                 if (kDebugMode) {
                                   print('Error: $e');
                                 }
                                 setState(() {
-                                  is_loading=false;
+                                  is_loading = false;
                                 });
                               }
-
                             },
                             child: Container(
                               width: 250,
@@ -203,16 +200,15 @@ class _UploadAudioPageState extends State<UploadAudioPage> {
                                 color: widget.ThirdColor,
                                 borderRadius: BorderRadius.circular(15),
                               ),
-                              child:  Center(
+                              child: Center(
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: <Widget>[
                                     SvgPicture.asset(
                                       'assets/icons/cloud_upload_white_24dp.svg',
                                       width: 70,
-                                      height:70,
+                                      height: 70,
                                       color: Colors.white,
-
                                     ),
                                     const SizedBox(height: 10),
                                     const Text(

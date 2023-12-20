@@ -36,7 +36,7 @@ class TopMenu extends StatelessWidget {
 height: 40,
 width: 40,
                         color: iconColor,),
-                       SizedBox(width: 10),
+                       const SizedBox(width: 10),
                       Text(
                         'ATLAS',
                         style: TextStyle(

@@ -36,7 +36,7 @@ class _UploadVideoPageState extends State<UploadVideoPage> {
   bool is_loading = false;
 
   Future<SummaryResponse?> uploadVideo(PlatformFile selectedFile) async {
-    var url = Uri.parse("$Mainurl/getVideoFile");
+    var url = Uri.parse("$mainUrl/getVideoFile");
     var request = http.MultipartRequest("POST", url);
     var videoFile = http.MultipartFile.fromBytes(
         'video', selectedFile.bytes!,
