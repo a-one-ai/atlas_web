@@ -73,7 +73,7 @@ class _UploadLinkPageState extends State<UploadLinkPage> {
                 Text(
                   'Atlas Transcription',
                   style: TextStyle(
-                      fontSize: 48,
+                      fontSize: 40,
                       fontWeight: FontWeight.bold,
                       color: LinkUploudPattern.firstColor),
                 ),

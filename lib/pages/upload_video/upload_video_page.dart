@@ -85,7 +85,7 @@ class _UploadVideoPageState extends State<UploadVideoPage> {
               'en_script': response.data?.enScript ?? '',
               'ar_summary': response.data?.arSummary ?? '',
               'en_summary': response.data?.enSummary ?? '',
-              'transcript_with_time_stamp': response.data?.scriptTime ?? ''
+            
             },
             color: FirstColor,
           ),
@@ -120,7 +120,7 @@ class _UploadVideoPageState extends State<UploadVideoPage> {
                     Text(
                       'Atlas Transcription',
                       style: TextStyle(
-                          fontSize: 48,
+                          fontSize: 40,
                           fontWeight: FontWeight.bold,
                           color: FirstColor),
                     ),

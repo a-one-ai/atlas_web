@@ -43,7 +43,7 @@ class _UploadAudioPageState extends State<UploadAudioPage> {
           'en_script': response.data?.enScript ?? '',
           'ar_summary': response.data?.arSummary ?? '',
           'en_summary': response.data?.enSummary ?? '',
-          'transcript_with_time_stamp': response.data?.scriptTime ?? ''
+
         },
         color: AudioUploadPattern.firstColor,
       ),
@@ -138,7 +138,7 @@ class _UploadAudioPageState extends State<UploadAudioPage> {
                 Text(
                   'Atlas Transcription',
                   style: TextStyle(
-                      fontSize: 48,
+                      fontSize: 40,
                       fontWeight: FontWeight.bold,
                       color: widget.FirstColor),
                 ),
@@ -173,16 +173,26 @@ class _UploadAudioPageState extends State<UploadAudioPage> {
                     : Column(
                         children: [
                           const SizedBox(height: 60),
-                          ElevatedButton(
-                            onPressed: () async {
+                         GestureDetector(
+                                onTap: () async {
                               // Logic to upload video/audio files
                               try {
-                               await pickAudioFile();
+                               await pickAudioFile().catchError((e) {
+                                setState(() {
+                                  is_loading=false;
+                                });
+                                  if (kDebugMode) {
+                                    print('Error: $e');
+                                  }
+                                });
 
                               } catch (e) {
                                 if (kDebugMode) {
                                   print('Error: $e');
                                 }
+                                setState(() {
+                                  is_loading=false;
+                                });
                               }
 
                             },
