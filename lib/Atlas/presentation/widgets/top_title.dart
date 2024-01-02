@@ -35,7 +35,7 @@ class TopMenu extends StatelessWidget {
 
                   Row(
                     children: [
-                      Image.network(Logo,
+                      Image.asset("assets/icon/logo_item.png",
                         height: 40,
                         width: 40,
                         color: iconColor,),

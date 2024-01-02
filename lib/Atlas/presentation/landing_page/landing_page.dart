@@ -109,8 +109,8 @@ class LandingPage extends StatelessWidget {
           Expanded(
             child: Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Image.network(
-                heroImageUrl,
+              child: Image.asset(
+                "assets/icon/hero-img.png",
                 fit: BoxFit.cover,
               ),
             ),
@@ -131,8 +131,8 @@ class LandingPage extends StatelessWidget {
             Container(
 
               padding: EdgeInsets.all(8.0),
-              child: Image.network(
-                heroImageUrl,
+              child: Image.asset(
+                "assets/icon/hero-img.png",
                 fit: BoxFit.fill,
                 height: 300,
                 width: 300,

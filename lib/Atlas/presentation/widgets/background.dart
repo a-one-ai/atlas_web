@@ -27,11 +27,11 @@ width: size.width,
          !Responsive.isMobile(context)?
            Positioned(
              bottom: 0,
-             child: Image.network(illustrationImageUrl, color: Colors.deepPurple,
+             child: Image.asset("assets/icon/background.png", color: Colors.deepPurple,
              fit: BoxFit.cover,
              ),
            ):
-            Image.network(MobileBackground, color: Colors.deepPurple,
+            Image.asset("assets/icon/background-mobile.png", color: Colors.deepPurple,
               fit: BoxFit.cover,
             ),
          SafeArea(child: child)
