@@ -200,10 +200,9 @@ class _UploadVideoPageState extends State<UploadVideoPage> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
                               SvgPicture.asset(
-                                'assets/icons/cloud_upload_white_24dp.svg',
+                                'assets/icon/cloud_upload_white_24dp.svg',
                                 width: 70,
                                 height:70,
-
                               ),
                               SizedBox(height: 10),
                               Text(

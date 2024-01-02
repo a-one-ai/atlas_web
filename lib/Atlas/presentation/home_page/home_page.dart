@@ -44,21 +44,21 @@ class HomeScreen extends StatelessWidget {
                       children: [
                         const FeatureWidget(
                           title: 'Video',
-                          icon: "assets/icons/play_circle_outline_white_24dp.svg",
+                          icon: "assets/icon/play_circle_outline_white_24dp.svg",
                           textColor: Colors.white,
                           bgColor: Color(0xFF833AB4),
                           route: UploadVideoPage(),
                         ),
                         const FeatureWidget(
                           title: 'Link',
-                          icon: "assets/icons/stream_white_24dp.svg",
+                          icon: "assets/icon/stream_white_24dp.svg",
                           textColor: Colors.white,
                           bgColor: Color(0xFFB31312),
                           route: UploadLinkPage(),
                         ),
                         FeatureWidget(
                           title: 'Audio',
-                          icon: "assets/icons/graphic_eq_white_24dp.svg",
+                          icon: "assets/icon/graphic_eq_white_24dp.svg",
                           textColor: Colors.white,
                           bgColor: const Color(0xFFB46D3A),
                           route: UploadAudioPage(),
