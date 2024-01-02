@@ -61,7 +61,7 @@ class ResultCard extends StatelessWidget {
                   onPressed: () {
                     // Logic to save file
                     var name = title.replaceAll(' ', '_').toLowerCase();
-                    // saveToFile(name, content);
+                    saveToFile(name, content);
                   },
                 ),
               ),

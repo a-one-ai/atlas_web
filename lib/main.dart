@@ -1,7 +1,5 @@
 
 import 'package:flutter/material.dart';
-import 'package:web_socket_channel/web_socket_channel.dart';
-import 'package:web_socket_channel/status.dart' as status;
 
 import 'Atlas/presentation/landing_page/landing_page.dart';
 
