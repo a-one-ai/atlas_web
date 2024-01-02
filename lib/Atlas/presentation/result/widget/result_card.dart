@@ -54,7 +54,7 @@ class ResultCard extends StatelessWidget {
                   iconSize: 40,
 
                   icon: SvgPicture.asset(
-                    'icons/txt-file-symbol-svgrepo-com.svg'
+                    'assets/icons/txt-file-symbol-svgrepo-com.svg'
 
 
                   ),

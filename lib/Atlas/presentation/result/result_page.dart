@@ -94,7 +94,7 @@ class _ResultScreenState extends State<ResultScreen> with SingleTickerProviderSt
               labelColor: widget.color,
               unselectedLabelColor: Colors.grey,
               tabs: [
-                _buildTab("Transcription"),
+                // _buildTab("Transcription"),
                 _buildTab("Arabic Transcription"),
                 _buildTab("English Transcription"),
                 // _buildTab("Arabic Summary"),
