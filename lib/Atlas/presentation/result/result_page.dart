@@ -27,7 +27,7 @@ class _ResultScreenState extends State<ResultScreen> with SingleTickerProviderSt
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length:3, vsync: this);
+    _tabController = TabController(length:2, vsync: this);
     _tabController.addListener(_handleTabSelection);
 
   }
@@ -49,9 +49,9 @@ class _ResultScreenState extends State<ResultScreen> with SingleTickerProviderSt
   Widget build(BuildContext context) {
 
     List<Widget> resultCards = [
-      ResultCard(title: 'Script',
-          content: widget.results['script'] ?? '',
-          color: widget.color),
+      // ResultCard(title: 'Script',
+      //     content: widget.results['script'] ?? '',
+      //     color: widget.color),
       ResultCard(
         title: 'Arabic Transcription',
         content: widget.results['ar_script'] ?? '',

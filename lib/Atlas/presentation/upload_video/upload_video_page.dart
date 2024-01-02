@@ -44,7 +44,7 @@ class _UploadVideoPageState extends State<UploadVideoPage> {
           'en_script': response.data?.enScript ?? '',
           'ar_summary': response.data?.arSummary ?? '',
           'en_summary': response.data?.enSummary ?? '',
-          'script': response.data?.script ?? '',
+          // 'script': response.data?.script ?? '',
 
         },
         color: AudioUploadPattern.firstColor,

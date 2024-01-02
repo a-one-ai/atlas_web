@@ -199,7 +199,7 @@ class _UploadLinkPageState extends State<UploadLinkPage> {
           'en_script': response.data!.enScript!,
           'ar_summary':'',
           'en_summary': '',
-          'script': response.data!.script!,
+          // 'script': response.data!.script!,
 
         },
       ),

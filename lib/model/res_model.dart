@@ -28,14 +28,14 @@ class Data {
   String? _arSummary;
   String? _enScript;
   String? _enSummary;
-  String? _script;
+  // String? _script;
 
   Data(
       {String? arScript,
         String? arSummary,
         String? enScript,
         String? enSummary,
-        String? script
+        // String? script
        }) {
     if (arScript != null) {
       _arScript = arScript;
@@ -49,9 +49,9 @@ class Data {
     if (enSummary != null) {
       _enSummary = enSummary;
     }
-    if (script != null) {
-      _script = script;
-    }
+    // if (script != null) {
+    //   _script = script;
+    // }
 
   }
 
@@ -63,15 +63,15 @@ class Data {
   set enScript(String? enScript) => _enScript = enScript;
   String? get enSummary => _enSummary;
   set enSummary(String? enSummary) => _enSummary = enSummary;
-  String? get script => _script;
-  set script(String? script) => _script = script;
+  // String? get script => _script;
+  // set script(String? script) => _script = script;
 
   Data.fromJson(Map<String, dynamic> json) {
     _arScript = json['ar_script'];
     _arSummary = json['ar_summary'];
     _enScript = json['en_script'];
     _enSummary = json['en_summary'];
-    _script = json['script'];
+    // _script = json['script'];
 
   }
 
@@ -81,7 +81,7 @@ class Data {
     data['ar_summary'] = _arSummary;
     data['en_script'] = _enScript;
     data['en_summary'] = _enSummary;
-    data['script'] = _script;
+    // data['script'] = _script;
 
     return data;
   }

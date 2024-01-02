@@ -6,8 +6,8 @@ import '../../model/res_model.dart';
 
 // String Mainurl = "http://184.105.208.147:8000";
 //String Mainurl = 'https://dc9a74986c7a94985bbe502eb163b6f06.clg07azjl.paperspacegradient.com/';
-String Mainurl = 'https://atlas.thinkapp.org';
-//String Mainurl = 'http://127.0.0.1:8000';
+//String Mainurl = 'https://atlas.thinkapp.org';
+String Mainurl = 'https://us-central1-shsh-3fec7.cloudfunctions.net/serverrequests-api';
 Future uploadStream(String text) async {
 
   Uri url = Uri.parse('$Mainurl/getYoutubeVideoLink');
