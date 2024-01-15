@@ -7,10 +7,10 @@ import '../../model/res_model.dart';
 // String Mainurl = "http://184.105.208.147:8000";
 //String Mainurl = 'https://dc9a74986c7a94985bbe502eb163b6f06.clg07azjl.paperspacegradient.com/';
 //String Mainurl = 'https://atlas.thinkapp.org';
-String Mainurl = 'https://us-central1-shsh-3fec7.cloudfunctions.net/serverrequests-api';
-Future uploadStream(String text) async {
-
-  Uri url = Uri.parse('$Mainurl/getYoutubeVideoLink');
+String mainUrl =
+    'https://us-central1-atlas-7f720.cloudfunctions.net/serverrequests-api';
+Future<SummaryResponse?> uploadStream(String text) async {
+  Uri url = Uri.parse('$mainUrl/getYoutubeVideoLink');
   String requestBody = json.encode({"link": text});
 
   try {
@@ -26,8 +26,8 @@ Future uploadStream(String text) async {
       // This is a success
 
       final responseBody = json.decode(response.body);
-      print('Server response: $responseBody');
-      var res = SummaryResponse.fromJson(responseBody);
+      debugPrint('Server response: $responseBody');
+      SummaryResponse res = SummaryResponse.fromJson(responseBody);
 
       return res;
     } else {
@@ -43,4 +43,5 @@ Future uploadStream(String text) async {
       print('Caught error: $e');
     }
   }
+  return null;
 }

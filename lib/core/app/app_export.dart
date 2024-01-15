@@ -1,0 +1,12 @@
+export 'package:atlas_web/core/app/view/app.dart';
+export 'package:atlas_web/boot.dart';
+export 'package:atlas_web/bloc_observer.dart';
+export 'package:atlas_web/core/localization/app_localization.dart';
+export 'package:atlas_web/core/utils/navigator_service.dart';
+export 'package:atlas_web/core/routes/app_routes.dart';
+export 'package:atlas_web/core/utils/color_constant.dart';
+export 'package:atlas_web/core/utils/size_utils.dart';
+export 'package:atlas_web/core/enums/enums.dart';
+export 'package:flutter_bloc/flutter_bloc.dart';
+export 'package:flutter_localizations/flutter_localizations.dart';
+export 'package:flutter/material.dart';
