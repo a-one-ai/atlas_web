@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:atlas_web/core/utils/image_constant.dart';
 import 'package:atlas_web/presentation/login_page/bloc/login_bloc.dart';
 import 'package:atlas_web/presentation/login_page/models/login_model.dart';
@@ -145,7 +143,7 @@ class _LoginPageState extends State<LoginPage> {
               _onCreateLoginEventSuccess(context);
             },
             onCreateLoginEventError: () {
-              _onCreateLoginEventError(context);
+              _onCreateLoginEventError();
             },
           ),
         );
@@ -154,7 +152,7 @@ class _LoginPageState extends State<LoginPage> {
   void _onCreateLoginEventSuccess(BuildContext context) =>
       context.go(AppRoutes.landingPageRoute);
 
-  void _onCreateLoginEventError(BuildContext context) => Fluttertoast.showToast(
+  void _onCreateLoginEventError() => Fluttertoast.showToast(
         webBgColor: "linear-gradient(to right, #311B92, #311B92)",
         msg: "msg_invalid_username_or_password".tr,
       );

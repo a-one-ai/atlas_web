@@ -51,6 +51,7 @@ dependencies:
   #Bloc
   flutter_bloc: ^8.1.1
   bloc: ^8.1.0
+  flip_card: ^0.7.0
 
 
 dev_dependencies:

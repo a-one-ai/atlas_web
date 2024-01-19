@@ -1,11 +1,9 @@
-import 'package:atlas_web/core/responsive.dart';
+import 'package:atlas_web/core/utils/responsive.dart';
 import 'package:atlas_web/presentation/home_page/home_page.dart';
 import 'package:atlas_web/presentation/widgets/background.dart';
 import 'package:flutter/material.dart';
 
-import '../../../core/colors_manager.dart';
-import '../../../core/network_image.dart';
-import '../widgets/top_title.dart';
+import '../widgets/logo_widget.dart';
 
 class LandingPage extends StatelessWidget {
   static const String title = 'ATLAS TRANSCRIPTION';
@@ -28,7 +26,7 @@ class LandingPage extends StatelessWidget {
                 centerTitle: true,
                 backgroundColor: Colors.transparent,
                 elevation: 0,
-                title: TopMenu(),
+                title: const LogoWidget(),
                 toolbarHeight: 100,
               ),
         backgroundColor: Colors.transparent,
@@ -121,71 +119,68 @@ class LandingPage extends StatelessWidget {
   }
 
   Widget _buildNarrowLayout(BuildContext context) {
-    return Container(
-      color: kbBackgroundColor,
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            TopMenu(),
-            Container(
-              padding: const EdgeInsets.all(8.0),
-              child: Image.asset(
-                "assets/icon/hero-img.png",
-                fit: BoxFit.fill,
-                height: 300,
-                width: 300,
-              ),
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          const LogoWidget(),
+          Container(
+            padding: const EdgeInsets.all(8.0),
+            child: Image.asset(
+              "assets/icon/hero-img.png",
+              fit: BoxFit.fill,
+              height: 300,
+              width: 300,
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    title,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  title,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 24,
+                    color: Colors.black,
+                  ),
+                ),
+                const SizedBox(height: 20),
+                Text(
+                  subtitle,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 16,
+                    color: Colors.grey[700],
+                  ),
+                ),
+                const SizedBox(height: 40),
+                ElevatedButton(
+                  onPressed: () {
+                    // Navigate to the desired screen
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const HomeScreen()));
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.deepPurple[900],
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 20, horizontal: 30),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(50),
+                    ),
+                  ),
+                  child: const Text(
+                    buttonText,
                     style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 24,
-                      color: Colors.black,
+                      fontSize: 18,
+                      color: Colors.white,
                     ),
                   ),
-                  const SizedBox(height: 20),
-                  Text(
-                    subtitle,
-                    style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 16,
-                      color: Colors.grey[700],
-                    ),
-                  ),
-                  const SizedBox(height: 40),
-                  ElevatedButton(
-                    onPressed: () {
-                      // Navigate to the desired screen
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const HomeScreen()));
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.deepPurple[900],
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 20, horizontal: 30),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(50),
-                      ),
-                    ),
-                    child: const Text(
-                      buttonText,
-                      style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

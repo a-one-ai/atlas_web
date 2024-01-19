@@ -130,10 +130,14 @@ class CustomButton extends StatelessWidget {
 
   _setColor() {
     switch (variant) {
-      case ButtonVariant.FillMainBlue:
+      case ButtonVariant.fillMainBlue:
         return ColorConstant.mainBlue;
-      case ButtonVariant.FillBlack900:
+      case ButtonVariant.fillBlack900:
         return ColorConstant.black900;
+      case ButtonVariant.fillPrimary:
+        return ColorConstant.primaryColor;
+      case ButtonVariant.fillDarkRed:
+        return ColorConstant.darkRedColor;
       default:
         return ColorConstant.primaryColor;
     }
@@ -219,7 +223,7 @@ enum ButtonPadding {
   PaddingAll3,
 }
 
-enum ButtonVariant { FillMainBlue, FillBlack900 }
+enum ButtonVariant { fillDarkRed, fillMainBlue, fillBlack900, fillPrimary }
 
 enum ButtonFontStyle {
   CairoSemiBold16,

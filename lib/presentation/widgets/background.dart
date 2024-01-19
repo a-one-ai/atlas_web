@@ -1,34 +1,45 @@
 import 'package:atlas_web/core/app/app_export.dart';
-import 'package:atlas_web/core/responsive.dart';
-
-import '../../../core/colors_manager.dart';
+import 'package:atlas_web/core/utils/image_constant.dart';
+import 'package:atlas_web/core/utils/responsive.dart';
+import 'package:atlas_web/presentation/widgets/custom_image_view.dart';
 
 class BackgroundWidget extends StatelessWidget {
   const BackgroundWidget({
     Key? key,
     required this.child,
+    this.color,
   }) : super(key: key);
 
   final Widget child;
+  final Color? color;
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: context.height,
       width: context.width,
-      color: kbBackgroundColor,
       child: Stack(
         children: [
           !Responsive.isMobile(context)
               ? Positioned(
                   bottom: 0,
-                  child: Image.asset(
-                    "assets/icon/background.png",
-                    color: ColorConstant.primaryColor,
+                  child: CustomImageView(
+                    imagePath: ImageConstant.background,
                     fit: BoxFit.cover,
+                    color: color ?? ColorConstant.primaryColor,
                   ),
                 )
               : const SizedBox.shrink(),
-          SafeArea(child: child)
+          SafeArea(child: child),
+          Align(
+            alignment: AlignmentDirectional.bottomCenter,
+            child: Padding(
+              padding: const EdgeInsetsDirectional.only(bottom: 10),
+              child: Text(
+                '©2024 ATLAS',
+                style: TextStyle(color: ColorConstant.primaryColor),
+              ),
+            ),
+          ),
         ],
       ),
     );

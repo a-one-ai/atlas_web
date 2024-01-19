@@ -23,5 +23,9 @@
   "msg_need_more_information":"تحتاج تفاصيل؟",
   "lbl_link": "رابط يوتيوب",
   "lbl_audio": "ملف صوت",
-  "lbl_video": "مقطع فيديو"
+  "lbl_video": "مقطع فيديو",
+  "lbl_atlas_transcription": "Atlas Transcription",
+  "lbl_start_transcription": "Start Transcription",
+  "lbl_enter_link": "Enter a Video Link"
+
 }

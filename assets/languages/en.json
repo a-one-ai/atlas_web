@@ -20,7 +20,11 @@
   "lbl_error":"Error!",
   "msg_how_can_i_help_you_today": "How can I help you today?",
   "msg_need_more_information":"More information?",
-  "lbl_link": "Youtube link",
+  "lbl_link": "Youtube Link",
   "lbl_audio": "Audio",
-  "lbl_video": "Video"
+  "lbl_video": "Video",
+  "lbl_atlas_transcription": "Atlas Transcription",
+  "lbl_atlas_transcription_description": "Transcribe your audio/video with ease!",
+  "lbl_start_transcription": "Start Transcription",
+  "lbl_enter_link": "Enter a video link"
 }

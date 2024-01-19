@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:atlas_web/core/data/models/login/post_login_req.dart';
 import 'package:atlas_web/core/data/models/login/post_login_resp.dart';
 import 'package:atlas_web/core/data/models/register/post_register_req.dart';
@@ -5,8 +7,10 @@ import 'package:atlas_web/core/data/models/register/post_register_resp.dart';
 import 'package:atlas_web/core/utils/logger.dart';
 import 'package:atlas_web/core/utils/progress_dialog_utils.dart';
 import 'package:atlas_web/firebase_options.dart';
+import 'package:atlas_web/model/transcription_response.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
@@ -36,6 +40,9 @@ class ApiClient {
   FirebaseAuth get auth => _auth;
   FirebaseFirestore get firestore => _firestore;
   FirebaseAuth get firebaseAuth => _firebaseAuth;
+
+  final String _mainUrl =
+      'https://us-central1-atlas-7f720.cloudfunctions.net/serverrequests-api';
 
   Future<PostLoginResp> createLogin({required PostLoginReq user}) async {
     try {
@@ -111,6 +118,52 @@ class ApiClient {
         stackTrace: stackTrace,
       );
       rethrow;
+    }
+  }
+
+  Future<TranscriptionResponse> uploadYoutubeLink(
+      {required String link}) async {
+    Map<String, String> headers = {'Content-Type': 'application/json'};
+
+    String data = json.encode({"link": link});
+    Dio dio = Dio();
+    Response response = await dio.request(
+      '$_mainUrl/getYoutubeVideoLink',
+      options: Options(method: 'POST', headers: headers),
+      data: data,
+    );
+
+    if (response.statusCode == 200) {
+      return TranscriptionResponse.fromJson(response.data);
+    } else {
+      return TranscriptionResponse();
+    }
+  }
+
+  Future<TranscriptionResponse> uploadAudio(
+      {required PlatformFile selectedFile}) async {
+    var headers = {'Content-Type': 'application/json'};
+
+    var data = FormData.fromMap({
+      'files': [
+        MultipartFile.fromBytes(filename: 'audio', selectedFile.bytes ?? [])
+      ],
+    });
+
+    var dio = Dio();
+    var response = await dio.request(
+      '$_mainUrl/getAudioFile',
+      options: Options(
+        method: 'POST',
+        headers: headers,
+      ),
+      data: data,
+    );
+
+    if (response.statusCode == 200) {
+      return TranscriptionResponse.fromJson(response.data);
+    } else {
+      return TranscriptionResponse();
     }
   }
 }
