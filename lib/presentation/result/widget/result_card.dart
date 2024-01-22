@@ -43,6 +43,7 @@ class _ResultCardState extends State<ResultCard> {
                 onTap: () => (cardKey.currentState?.isFront ?? false)
                     ? saveToFile("Transcription", widget.content)
                     : saveToFile("Translation", widget.translation),
+                margin: const EdgeInsets.all(20),
                 height: 35,
                 width: 35,
                 svgPath: ImageConstant.txtFileIcon)
