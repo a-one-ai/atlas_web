@@ -3,4 +3,5 @@ class ImageConstant {
   static String appLogo = 'assets/images/atlas_logo.svg';
   static String page404 = 'assets/images/404.svg';
   static String cloudUpload = 'assets/icon/cloud_upload_white.svg';
+  static String txtFileIcon = 'assets/icon/txt-file-icon.svg';
 }

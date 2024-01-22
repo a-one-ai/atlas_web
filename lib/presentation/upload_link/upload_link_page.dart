@@ -49,37 +49,60 @@ class _UploadLinkPageState extends State<UploadLinkPage> {
                       width: !Responsive.isMobile(context)
                           ? context.width / 2.5
                           : null,
-                      child: BlocSelector<UploadLinkBloc, UploadLinkState,
-                          TextEditingController?>(
-                        selector: (state) => state.linkController,
-                        builder: (context, controller) {
-                          return TextFormField(
-                            controller: controller,
-                            decoration: InputDecoration(
-                              hintText: "lbl_enter_link".tr,
-                              border: OutlineInputBorder(
-                                borderRadius: const BorderRadius.all(
-                                  Radius.circular(10),
-                                ),
-                                borderSide: BorderSide(
-                                    color: ColorConstant.darkRedColor),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: BorderSide(
-                                    color: ColorConstant
-                                        .darkRedColor // Change focus color
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          BlocSelector<UploadLinkBloc, UploadLinkState,
+                              TextEditingController?>(
+                            selector: (state) => state.linkController,
+                            builder: (context, controller) {
+                              return TextFormField(
+                                controller: controller,
+                                decoration: InputDecoration(
+                                  hintText: "lbl_enter_link".tr,
+                                  border: OutlineInputBorder(
+                                    borderRadius: const BorderRadius.all(
+                                      Radius.circular(10),
                                     ),
-                              ),
-                            ),
-                            onFieldSubmitted: (value) => context
-                                .read<UploadLinkBloc>()
-                                .add(CheckForUrl(text: value)),
-                            onChanged: (value) => context
-                                .read<UploadLinkBloc>()
-                                .add(CheckForUrl(text: value)),
-                          );
-                        },
+                                    borderSide: BorderSide(
+                                        color: ColorConstant.darkRedColor),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                    borderSide: BorderSide(
+                                        color: ColorConstant
+                                            .darkRedColor // Change focus color
+                                        ),
+                                  ),
+                                ),
+                                onFieldSubmitted: (value) => context
+                                    .read<UploadLinkBloc>()
+                                    .add(CheckForUrl(text: value)),
+                                onChanged: (value) => context
+                                    .read<UploadLinkBloc>()
+                                    .add(CheckForUrl(text: value)),
+                              );
+                            },
+                          ),
+                          BlocSelector<UploadLinkBloc, UploadLinkState, bool?>(
+                            selector: (state) => state.translate,
+                            builder: (context, status) {
+                              return Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 10),
+                                child: CheckboxListTile(
+                                  activeColor: ColorConstant.primaryColor,
+                                  value: status,
+                                  onChanged: (value) => context
+                                      .read<UploadLinkBloc>()
+                                      .add(ChangeTranslationStatus(
+                                          status: value ?? false)),
+                                  title: Text("${"lbl_translate".tr}?"),
+                                ),
+                              );
+                            },
+                          ),
+                        ],
                       ),
                     ),
                     BlocSelector<UploadLinkBloc, UploadLinkState, bool?>(

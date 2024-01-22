@@ -122,10 +122,18 @@ class ApiClient {
   }
 
   Future<TranscriptionResponse> uploadYoutubeLink(
-      {required String link}) async {
+      {required String link, required bool translate}) async {
     Map<String, String> headers = {'Content-Type': 'application/json'};
 
-    String data = json.encode({"link": link});
+    Map<String, dynamic> body = {"link": link};
+
+    if (translate) {
+      body["tr"] = "True";
+    } else {
+      body["tr"] = "False";
+    }
+
+    String data = json.encode(body);
     Dio dio = Dio();
     Response response = await dio.request(
       '$_mainUrl/getYoutubeVideoLink',

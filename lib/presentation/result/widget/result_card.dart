@@ -1,7 +1,8 @@
+import 'package:atlas_web/core/utils/image_constant.dart';
 import 'package:atlas_web/presentation/widgets/custom_button.dart';
+import 'package:atlas_web/presentation/widgets/custom_image_view.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../services/file_helper/save_file.dart';
 
@@ -37,16 +38,13 @@ class _ResultCardState extends State<ResultCard> {
                 margin: const EdgeInsets.all(20),
                 variant: ButtonVariant.fillBlack900,
                 shape: ButtonShape.Square),
-            SizedBox(
-              width: 50,
-              height: 50,
-              child: IconButton(
-                iconSize: 40,
-                icon: SvgPicture.asset(
-                    'assets/icon/txt-file-symbol-svgrepo-com.svg'),
-                onPressed: () => saveToFile("Transcription", widget.content),
-              ),
-            ),
+            CustomImageView(
+                onTap: () => (cardKey.currentState?.isFront ?? false)
+                    ? saveToFile("Transcription", widget.content)
+                    : saveToFile("Translation", widget.translation),
+                height: 35,
+                width: 35,
+                svgPath: ImageConstant.txtFileIcon)
           ],
         ),
         FlipCard(

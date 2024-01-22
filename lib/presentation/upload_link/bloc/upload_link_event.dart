@@ -24,3 +24,10 @@ class CheckForUrl extends UploadLinkEvent {
   @override
   List<Object?> get props => [text];
 }
+
+class ChangeTranslationStatus extends UploadLinkEvent {
+  final bool status;
+  ChangeTranslationStatus({required this.status});
+  @override
+  List<Object?> get props => [status];
+}
