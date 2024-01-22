@@ -26,5 +26,6 @@
   "lbl_atlas_transcription": "Atlas Transcription",
   "lbl_atlas_transcription_description": "Transcribe your audio/video with ease!",
   "lbl_start_transcription": "Start Transcription",
-  "lbl_enter_link": "Enter a video link"
+  "lbl_enter_link": "Enter a video link",
+  "lbl_translate": "Translate"
 }

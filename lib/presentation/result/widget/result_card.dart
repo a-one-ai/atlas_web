@@ -3,7 +3,6 @@ import 'package:atlas_web/presentation/widgets/custom_button.dart';
 import 'package:atlas_web/presentation/widgets/custom_image_view.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../services/file_helper/save_file.dart';
 
@@ -46,7 +45,6 @@ class _ResultCardState extends State<ResultCard> {
                     : saveToFile("Translation", widget.translation),
                 height: 35,
                 width: 35,
-                margin: const EdgeInsets.all(20),
                 svgPath: ImageConstant.txtFileIcon)
           ],
         ),
