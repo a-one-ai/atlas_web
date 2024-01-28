@@ -16,8 +16,11 @@ class Repository {
           {required PostRegisterReq postRegisterReq}) async =>
       await _apiClient.createRegister(user: postRegisterReq);
   Future<TranscriptionResponse> uploadYoutubeLink(
-          {required String link, required bool translate}) async =>
-      await _apiClient.uploadYoutubeLink(link: link, translate: translate);
+          {required String link,
+          required bool translate,
+          required String language}) async =>
+      await _apiClient.uploadYoutubeLink(
+          link: link, translate: translate, language: language);
   Future<TranscriptionResponse> uploadAudio(
           {required PlatformFile selectedFile}) async =>
       await _apiClient.uploadAudio(selectedFile: selectedFile);

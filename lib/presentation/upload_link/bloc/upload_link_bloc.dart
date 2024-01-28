@@ -13,6 +13,7 @@ class UploadLinkBloc extends Bloc<UploadLinkEvent, UploadLinkState> {
     on<UploadLink>(_onUploadLink);
     on<CheckForUrl>(_onCheckForUrl);
     on<ChangeTranslationStatus>(_onChangeTranslationStatus);
+    on<ChangeLanguageFrom>(_onChangeLanguageFrom);
   }
 
   final _repository = Repository();
@@ -33,7 +34,10 @@ class UploadLinkBloc extends Bloc<UploadLinkEvent, UploadLinkState> {
     if (link.isNotEmpty) {
       emit(state.copyWith(request: Request.loading));
       await _repository
-          .uploadYoutubeLink(link: link, translate: state.translate ?? false)
+          .uploadYoutubeLink(
+              link: link,
+              translate: state.translate ?? false,
+              language: state.languageFrom ?? "english")
           .then((value) {
         event.onUploadLinkEventSuccess.call(value);
         emit(state.copyWith(request: Request.success, response: value));
@@ -57,5 +61,10 @@ class UploadLinkBloc extends Bloc<UploadLinkEvent, UploadLinkState> {
   _onChangeTranslationStatus(
       ChangeTranslationStatus event, Emitter<UploadLinkState> emit) {
     emit(state.copyWith(translate: event.status));
+  }
+
+  _onChangeLanguageFrom(
+      ChangeLanguageFrom event, Emitter<UploadLinkState> emit) {
+    emit(state.copyWith(languageFrom: event.language));
   }
 }

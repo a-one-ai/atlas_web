@@ -122,10 +122,12 @@ class ApiClient {
   }
 
   Future<TranscriptionResponse> uploadYoutubeLink(
-      {required String link, required bool translate}) async {
+      {required String link,
+      required bool translate,
+      required String language}) async {
     Map<String, String> headers = {'Content-Type': 'application/json'};
 
-    Map<String, dynamic> body = {"link": link};
+    Map<String, dynamic> body = {"link": link, "lang": language};
 
     if (translate) {
       body["tr"] = "True";
