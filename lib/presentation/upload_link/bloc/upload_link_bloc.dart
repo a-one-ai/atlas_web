@@ -34,10 +34,7 @@ class UploadLinkBloc extends Bloc<UploadLinkEvent, UploadLinkState> {
     if (link.isNotEmpty) {
       emit(state.copyWith(request: Request.loading));
       await _repository
-          .uploadYoutubeLink(
-              link: link,
-              translate: state.translate ?? false,
-              language: state.languageFrom ?? "english")
+          .uploadYoutubeLink(link: link, translate: state.translate ?? false)
           .then((value) {
         event.onUploadLinkEventSuccess.call(value);
         emit(state.copyWith(request: Request.success, response: value));
