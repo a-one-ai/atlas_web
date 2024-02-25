@@ -41,8 +41,7 @@ class ApiClient {
   FirebaseFirestore get firestore => _firestore;
   FirebaseAuth get firebaseAuth => _firebaseAuth;
 
-  final String _mainUrl =
-      'https://us-central1-atlas-7f720.cloudfunctions.net/serverrequests-api';
+  final String _mainUrl = 'http://172.10.1.2:8000';
 
   Future<PostLoginResp> createLogin({required PostLoginReq user}) async {
     try {
@@ -150,17 +149,46 @@ class ApiClient {
 
   Future<TranscriptionResponse> uploadAudio(
       {required PlatformFile selectedFile}) async {
-    var headers = {'Content-Type': 'application/json'};
+    var headers = {'Content-Type': 'multipart/form-data'};
 
     var data = FormData.fromMap({
       'files': [
-        MultipartFile.fromBytes(filename: 'audio', selectedFile.bytes ?? [])
+        MultipartFile.fromBytes(
+            filename: selectedFile.name, selectedFile.bytes ?? [])
       ],
     });
 
     var dio = Dio();
     var response = await dio.request(
       '$_mainUrl/getAudioFile',
+      options: Options(
+        method: 'POST',
+        headers: headers,
+      ),
+      data: data,
+    );
+
+    if (response.statusCode == 200) {
+      return TranscriptionResponse.fromJson(response.data);
+    } else {
+      return TranscriptionResponse();
+    }
+  }
+
+  Future<TranscriptionResponse> uploadVideo(
+      {required PlatformFile selectedFile}) async {
+    var headers = {'Content-Type': 'multipart/form-data'};
+
+    var data = FormData.fromMap({
+      'files': [
+        MultipartFile.fromBytes(
+            filename: selectedFile.name, selectedFile.bytes ?? [])
+      ],
+    });
+
+    var dio = Dio();
+    var response = await dio.request(
+      '$_mainUrl/getVideoFile',
       options: Options(
         method: 'POST',
         headers: headers,

@@ -84,6 +84,33 @@ class _UploadLinkPageState extends State<UploadLinkPage> {
                               );
                             },
                           ),
+                          // Container(
+                          //   padding: const EdgeInsets.symmetric(vertical: 10),
+                          //   width: !Responsive.isMobile(context)
+                          //       ? context.width / 2.5
+                          //       : null,
+                          //   child: BlocSelector<UploadLinkBloc, UploadLinkState,
+                          //       String?>(
+                          //     selector: (state) => state.languageFrom,
+                          //     builder: (context, category) {
+                          //       return CustomDropDownWidget(
+                          //         initialItem: category,
+                          //         items: const [
+                          //           "german",
+                          //           "hebrew",
+                          //           "english",
+                          //           "arabic",
+                          //           "french"
+                          //         ],
+                          //         onChange: (String? value) => context
+                          //             .read<UploadLinkBloc>()
+                          //             .add(ChangeLanguageFrom(
+                          //                 language: value ?? '')),
+                          //         hintText: "Language from",
+                          //       );
+                          //     },
+                          //   ),
+                          // ),
                           BlocSelector<UploadLinkBloc, UploadLinkState, bool?>(
                             selector: (state) => state.translate,
                             builder: (context, status) {

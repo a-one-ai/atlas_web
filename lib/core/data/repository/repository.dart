@@ -21,4 +21,7 @@ class Repository {
   Future<TranscriptionResponse> uploadAudio(
           {required PlatformFile selectedFile}) async =>
       await _apiClient.uploadAudio(selectedFile: selectedFile);
+  Future<TranscriptionResponse> uploadVideo(
+          {required PlatformFile selectedFile}) async =>
+      await _apiClient.uploadVideo(selectedFile: selectedFile);
 }

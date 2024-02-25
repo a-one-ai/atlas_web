@@ -31,3 +31,10 @@ class ChangeTranslationStatus extends UploadLinkEvent {
   @override
   List<Object?> get props => [status];
 }
+
+class ChangeLanguageFrom extends UploadLinkEvent {
+  final String language;
+  ChangeLanguageFrom({required this.language});
+  @override
+  List<Object?> get props => [language];
+}

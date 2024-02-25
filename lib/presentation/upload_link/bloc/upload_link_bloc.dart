@@ -13,6 +13,7 @@ class UploadLinkBloc extends Bloc<UploadLinkEvent, UploadLinkState> {
     on<UploadLink>(_onUploadLink);
     on<CheckForUrl>(_onCheckForUrl);
     on<ChangeTranslationStatus>(_onChangeTranslationStatus);
+    on<ChangeLanguageFrom>(_onChangeLanguageFrom);
   }
 
   final _repository = Repository();
@@ -57,5 +58,10 @@ class UploadLinkBloc extends Bloc<UploadLinkEvent, UploadLinkState> {
   _onChangeTranslationStatus(
       ChangeTranslationStatus event, Emitter<UploadLinkState> emit) {
     emit(state.copyWith(translate: event.status));
+  }
+
+  _onChangeLanguageFrom(
+      ChangeLanguageFrom event, Emitter<UploadLinkState> emit) {
+    emit(state.copyWith(languageFrom: event.language));
   }
 }

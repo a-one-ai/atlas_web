@@ -31,17 +31,19 @@ class _ResultCardState extends State<ResultCard> {
       children: [
         Row(
           children: [
-            CustomButton(
-                width: 200,
-                text: "Translate",
-                onTap: () => cardKey.currentState?.toggleCard(),
-                margin: const EdgeInsets.all(20),
-                variant: ButtonVariant.fillBlack900,
-                shape: ButtonShape.Square),
+            if (widget.translation.isNotEmpty)
+              CustomButton(
+                  width: 200,
+                  text: "Translate",
+                  onTap: () => cardKey.currentState?.toggleCard(),
+                  margin: const EdgeInsets.all(20),
+                  variant: ButtonVariant.fillBlack900,
+                  shape: ButtonShape.Square),
             CustomImageView(
                 onTap: () => (cardKey.currentState?.isFront ?? false)
                     ? saveToFile("Transcription", widget.content)
                     : saveToFile("Translation", widget.translation),
+                margin: const EdgeInsets.all(20),
                 height: 35,
                 width: 35,
                 svgPath: ImageConstant.txtFileIcon)
