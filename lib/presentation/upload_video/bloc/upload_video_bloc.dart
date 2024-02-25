@@ -31,7 +31,7 @@ class UploadVideoBloc extends Bloc<UploadVideoEvent, UploadVideoState> {
       PlatformFile file = result.files.first;
 
       emit(state.copyWith(request: Request.loading));
-      await _repository.uploadAudio(selectedFile: file).then((value) {
+      await _repository.uploadVideo(selectedFile: file).then((value) {
         event.onUploadFileEventSuccess.call();
         emit(state.copyWith(request: Request.success, response: value));
       }).onError((error, stackTrace) {
